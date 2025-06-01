@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (10.3-2021.10)
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -30,6 +30,9 @@ endif
 ifneq ($(strip $(C++_DEPS)),)
 -include $(C++_DEPS)
 endif
+ifneq ($(strip $(CCM_DEPS)),)
+-include $(CCM_DEPS)
+endif
 ifneq ($(strip $(C_UPPER_DEPS)),)
 -include $(C_UPPER_DEPS)
 endif
@@ -41,6 +44,12 @@ ifneq ($(strip $(S_DEPS)),)
 endif
 ifneq ($(strip $(S_UPPER_DEPS)),)
 -include $(S_UPPER_DEPS)
+endif
+ifneq ($(strip $(CXXM_DEPS)),)
+-include $(CXXM_DEPS)
+endif
+ifneq ($(strip $(C++M_DEPS)),)
+-include $(C++M_DEPS)
 endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
@@ -87,8 +96,8 @@ all: main-build
 main-build: SpaceInvaders.elf secondary-outputs
 
 # Tool invocations
-SpaceInvaders.elf SpaceInvaders.map: $(OBJS) $(USER_OBJS) C:\TouchGFXProjects\SpaceInvaders\STM32CubeIDE\STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "SpaceInvaders.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\TouchGFXProjects\SpaceInvaders\STM32CubeIDE\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SpaceInvaders.map" -Wl,--gc-sections -static -LC:/git/STM32F429-dk/untouched/rev_D/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc -LC:/git/STM32F429-dk/rev_E01/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc -LC:/TouchGFXProjects/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc -LD:/hoctap/20222/Embedded/source/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+SpaceInvaders.elf SpaceInvaders.map: $(OBJS) $(USER_OBJS) /Volumes/SSD\ Quan/HQ7/Hust/2024.2/embedded/lir/Source_code/STM32CubeIDE/STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "SpaceInvaders.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Volumes/SSD Quan/HQ7/Hust/2024.2/embedded/lir/Source_code/STM32CubeIDE/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SpaceInvaders.map" -Wl,--gc-sections -static -LC:/git/STM32F429-dk/untouched/rev_D/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc -LC:/git/STM32F429-dk/rev_E01/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc -LC:/TouchGFXProjects/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc -LD:/hoctap/20222/Embedded/source/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
