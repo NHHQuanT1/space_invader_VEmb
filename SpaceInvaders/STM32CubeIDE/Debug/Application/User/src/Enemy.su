@@ -1,0 +1,5 @@
+../Application/User/src/Enemy.cpp:19:1:Enemy::~Enemy()	8	static
+../Application/User/src/Enemy.cpp:19:1:virtual Enemy::~Enemy()	8	static
+../Application/User/src/Enemy.cpp:9:1:Enemy::Enemy()	8	static
+../Application/User/src/Enemy.cpp:23:6:bool Enemy::update(uint8_t)	8	static
+../Application/User/src/Enemy.cpp:39:6:bool Enemy::updateBullet(uint8_t)	0	static
