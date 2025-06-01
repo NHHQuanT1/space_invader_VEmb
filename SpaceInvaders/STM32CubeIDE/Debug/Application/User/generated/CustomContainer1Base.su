@@ -12,4 +12,5 @@
 C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp:12:1:CustomContainer1Base::~CustomContainer1Base()	0	static
 C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp:17:6:virtual void CustomContainer1Base::initialize()	0	static
 C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp:12:1:virtual CustomContainer1Base::~CustomContainer1Base()	8	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:121:18:virtual void touchgfx::Drawable::invalidateContent() const	0	static
 C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/containers/CustomContainer1Base.cpp:6:1:CustomContainer1Base::CustomContainer1Base()	0	static

@@ -1,0 +1,6 @@
+app.cpp:140:6:void updateEnemy(uint8_t)	6
+app.cpp:199:6:void updateShipBullet(uint8_t)	4
+app.cpp:218:6:void updateEnemyBullet(uint8_t)	8
+app.cpp:36:6:void gameTask(void*)	18
+app.cpp:241:1:cpp)	4
+app.cpp:241:1:cpp)	4

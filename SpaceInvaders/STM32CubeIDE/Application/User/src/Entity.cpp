@@ -1,8 +1,5 @@
 /*
  * Entity.cpp
- *
- *  Created on: Aug 13, 2022
- *      Author: QuangLV
  */
 
 #include "Entity.hpp"

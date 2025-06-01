@@ -17,16 +17,16 @@
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:154:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp:45:18:virtual void touchgfx::Widget::getLastChild(int16_t, int16_t, touchgfx::Drawable**)	0	static
 ../../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:36:7:touchgfx::View<MenuScreenPresenter>::~View()	0	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/menuscreen_screen/MenuScreenViewBase.hpp:18:13:MenuScreenViewBase::~MenuScreenViewBase()	0	static
-C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:31:6:virtual void MenuScreenViewBase::setupScreen()	0	static
+C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:29:1:MenuScreenViewBase::~MenuScreenViewBase()	0	static
+C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:34:6:virtual void MenuScreenViewBase::setupScreen()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:357:8:touchgfx::Callback<MenuScreenViewBase, const touchgfx::AbstractButton&>::~Callback()	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:386:18:void touchgfx::Callback<dest_type, T1, void, void>::execute(T1) [with dest_type = MenuScreenViewBase; T1 = const touchgfx::AbstractButton&]	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:396:18:bool touchgfx::Callback<dest_type, T1, void, void>::isValid() const [with dest_type = MenuScreenViewBase; T1 = const touchgfx::AbstractButton&]	0	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Callback.hpp:357:8:virtual touchgfx::Callback<MenuScreenViewBase, const touchgfx::AbstractButton&>::~Callback()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/mvp/View.hpp:36:7:virtual touchgfx::View<MenuScreenPresenter>::~View()	8	static
-../../TouchGFX/generated/gui_generated/include/gui_generated/menuscreen_screen/MenuScreenViewBase.hpp:18:13:virtual MenuScreenViewBase::~MenuScreenViewBase()	8	static
+C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:29:1:virtual MenuScreenViewBase::~MenuScreenViewBase()	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:121:18:virtual void touchgfx::Drawable::invalidateContent() const	0	static
-C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:36:6:void MenuScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton&)	8	static
+C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:39:6:void MenuScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton&)	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:343:10:void touchgfx::Drawable::setXY(int16_t, int16_t)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:132:10:void touchgfx::ButtonWithLabel::updateTextPosition()	24	static
-C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:9:1:MenuScreenViewBase::MenuScreenViewBase()	40	static
+C:/TouchGFXProjects/SpaceInvaders/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:9:1:MenuScreenViewBase::MenuScreenViewBase()	32	static

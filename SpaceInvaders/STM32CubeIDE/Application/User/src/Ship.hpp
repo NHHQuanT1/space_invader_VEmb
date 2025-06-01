@@ -1,8 +1,5 @@
 /*
  * Ship.h
- *
- *  Created on: Aug 13, 2022
- *      Author: QuangLV
  */
 
 #ifndef APPLICATION_USER_SRC_SHIP_HPP_

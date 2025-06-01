@@ -115,6 +115,7 @@
                   <listOptionValue builtIn="false" value="C:/git/STM32F429-dk/untouched/rev_D/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/git/STM32F429-dk/rev_E01/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/TouchGFXProjects/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
+                  <listOptionValue builtIn="false" value="D:/hoctap/20222/Embedded/source/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                 </option>
                 <inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input.351982862" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input">
                   <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -241,6 +242,7 @@
                   <listOptionValue builtIn="false" value="C:/git/STM32F429-dk/untouched/rev_D/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/git/STM32F429-dk/rev_E01/stm32f429i_disco_rev_e01/STM32F429I_DISCO_REV_E01/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/TouchGFXProjects/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
+                  <listOptionValue builtIn="false" value="D:/hoctap/20222/Embedded/source/SpaceInvaders/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                 </option>
                 <inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input.1556095232" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input">
                   <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

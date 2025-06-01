@@ -17,7 +17,7 @@ class GameScreenViewBase : public touchgfx::View<GameScreenPresenter>
 {
 public:
     GameScreenViewBase();
-    virtual ~GameScreenViewBase() {}
+    virtual ~GameScreenViewBase();
     virtual void setupScreen();
 
 protected:

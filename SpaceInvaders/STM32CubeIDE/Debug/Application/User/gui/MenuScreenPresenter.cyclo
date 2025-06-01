@@ -1,0 +1,5 @@
+MenuScreenPresenter.hpp:28:13:MenuScreenPresenter::~MenuScreenPresenter()	1
+MenuScreenPresenter.cpp:10:6:virtual void MenuScreenPresenter::activate()	1
+MenuScreenPresenter.hpp:28:13:virtual MenuScreenPresenter::~MenuScreenPresenter()	1
+MenuScreenPresenter.hpp:28:13:virtual void* MenuScreenPresenter::_ZThn4_N19MenuScreenPresenterD1Ev()	1
+MenuScreenPresenter.cpp:4:1:MenuScreenPresenter::MenuScreenPresenter(MenuScreenView&)	1

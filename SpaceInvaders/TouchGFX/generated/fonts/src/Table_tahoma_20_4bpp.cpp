@@ -178,6 +178,6 @@ touchgfx::GeneratedFont& getFont_tahoma_20_4bpp();
 
 touchgfx::GeneratedFont& getFont_tahoma_20_4bpp()
 {
-    static touchgfx::GeneratedFont tahoma_20_4bpp(glyphs_tahoma_20_4bpp, 1, 20, 0, 4, 1, 0, 0, unicodes_tahoma_20_4bpp, kerning_tahoma_20_4bpp, 63, 0, 0, &tahoma_contextualFormsTable);
+    static touchgfx::GeneratedFont tahoma_20_4bpp(glyphs_tahoma_20_4bpp, 1, 20, 20, 0, 0, 4, 1, 0, 0, unicodes_tahoma_20_4bpp, kerning_tahoma_20_4bpp, 63, 0, 0, &tahoma_contextualFormsTable);
     return tahoma_20_4bpp;
 }

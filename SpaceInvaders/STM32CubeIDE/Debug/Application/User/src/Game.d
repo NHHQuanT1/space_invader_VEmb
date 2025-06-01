@@ -1,6 +1,7 @@
 Application/User/src/Game.o: ../Application/User/src/Game.cpp \
  ../Application/User/src/Game.hpp ../Application/User/src/Ship.hpp \
  ../../TouchGFX/generated/images/include/BitmapDatabase.hpp \
+ ../../TouchGFX/generated/images/include/images/BitmapDatabase.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Types.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Config.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Bitmap.hpp \
@@ -16,6 +17,7 @@ Application/User/src/Game.o: ../Application/User/src/Game.cpp \
 ../Application/User/src/Game.hpp:
 ../Application/User/src/Ship.hpp:
 ../../TouchGFX/generated/images/include/BitmapDatabase.hpp:
+../../TouchGFX/generated/images/include/images/BitmapDatabase.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Types.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Config.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Bitmap.hpp:

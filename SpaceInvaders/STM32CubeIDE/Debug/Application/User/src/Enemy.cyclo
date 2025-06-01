@@ -1,0 +1,5 @@
+Enemy.cpp:21:1:Enemy::~Enemy()	1
+Enemy.cpp:21:1:virtual Enemy::~Enemy()	1
+Enemy.cpp:6:1:Enemy::Enemy()	1
+Enemy.cpp:25:6:bool Enemy::update(uint8_t)	5
+Enemy.cpp:55:6:bool Enemy::updateBullet(uint8_t)	2

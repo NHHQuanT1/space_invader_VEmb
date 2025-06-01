@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2022) STMicroelectronics.
+* Copyright (c) 2018(-2023) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.22.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -18,6 +18,7 @@ namespace touchgfx
 {
 AbstractShape::AbstractShape()
     : CanvasWidget(),
+      fillingRule(Rasterizer::FILL_NON_ZERO),
       dx(0), dy(0), shapeAngle(0),
       xScale(CWRUtil::toQ10<int>(1)), yScale(CWRUtil::toQ10<int>(1)),
       minimalRect()
@@ -27,12 +28,14 @@ AbstractShape::AbstractShape()
 
 bool AbstractShape::drawCanvasWidget(const Rect& invalidatedArea) const
 {
-    Canvas canvas(this, invalidatedArea);
-    int numPoints = getNumPoints();
+    const int numPoints = getNumPoints();
     if (numPoints == 0)
     {
         return true;
     }
+
+    Canvas canvas(this, invalidatedArea);
+    canvas.setFillingRule(fillingRule);
 
     canvas.moveTo(getCacheX(0), getCacheY(0));
     for (int i = 1; i < numPoints; i++)
@@ -48,19 +51,22 @@ bool AbstractShape::drawCanvasWidget(const Rect& invalidatedArea) const
 
 void AbstractShape::updateAbstractShapeCache()
 {
-    int numPoints = getNumPoints();
+    const int numPoints = getNumPoints();
 
     int xMin = 0;
     int xMax = 0;
     int yMin = 0;
     int yMax = 0;
 
+    const CWRUtil::Q15 cos = CWRUtil::cosine(shapeAngle);
+    const CWRUtil::Q15 sin = CWRUtil::sine(shapeAngle);
+
     for (int i = 0; i < numPoints; i++)
     {
-        CWRUtil::Q5 xCorner = getCornerX(i);
-        CWRUtil::Q5 yCorner = getCornerY(i);
+        CWRUtil::Q5 const xCorner = getCornerX(i);
+        CWRUtil::Q5 const yCorner = getCornerY(i);
 
-        CWRUtil::Q5 xCache = dx + ((CWRUtil::mulQ5(xCorner, xScale) * CWRUtil::cosine(shapeAngle))) - ((CWRUtil::mulQ5(yCorner, yScale) * CWRUtil::sine(shapeAngle)));
+        CWRUtil::Q5 const xCache = dx + ((CWRUtil::mulQ5(xCorner, xScale) * cos)) - ((CWRUtil::mulQ5(yCorner, yScale) * sin));
         if (i == 0 || xCache.to<int>() > xMax)
         {
             xMax = xCache.to<int>();
@@ -69,7 +75,7 @@ void AbstractShape::updateAbstractShapeCache()
         {
             xMin = xCache.to<int>();
         }
-        CWRUtil::Q5 yCache = dy + ((CWRUtil::mulQ5(yCorner, yScale) * CWRUtil::cosine(shapeAngle))) + ((CWRUtil::mulQ5(xCorner, xScale) * CWRUtil::sine(shapeAngle)));
+        CWRUtil::Q5 const yCache = dy + ((CWRUtil::mulQ5(yCorner, yScale) * cos)) + ((CWRUtil::mulQ5(xCorner, xScale) * sin));
         if (i == 0 || yCache.to<int>() > yMax)
         {
             yMax = yCache.to<int>();

@@ -15,7 +15,7 @@ class MenuScreenViewBase : public touchgfx::View<MenuScreenPresenter>
 {
 public:
     MenuScreenViewBase();
-    virtual ~MenuScreenViewBase() {}
+    virtual ~MenuScreenViewBase();
     virtual void setupScreen();
 
 protected:

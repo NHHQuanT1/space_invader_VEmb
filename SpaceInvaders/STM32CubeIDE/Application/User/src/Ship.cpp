@@ -1,8 +1,5 @@
 /*
  * Ship.cpp
- *
- *  Created on: Aug 13, 2022
- *      Author: QuangLV
  */
 
 #include "Ship.hpp"
@@ -11,7 +8,7 @@
 Ship::Ship() {
 	// TODO Auto-generated constructor stub
 	this->coordinateX = 104;
-	this->coordinateY = 220;
+	this->coordinateY = 260;
 	this->velocityX = 0;
 	this->velocityY = 0;
 	this->width = 28;

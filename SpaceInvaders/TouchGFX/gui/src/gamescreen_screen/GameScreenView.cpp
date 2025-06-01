@@ -1,10 +1,12 @@
 #include <gui/gamescreen_screen/GameScreenView.hpp>
+//#include <D:\hoctap\20222\Embedded\source\SpaceInvaders\STM32CubeIDE\Application\User\src\app.hpp>
 #include <C:\TouchGFXProjects\SpaceInvaders\STM32CubeIDE\Application\User\src\app.hpp>
 #include <BitmapDatabase.hpp>
 #include <cmsis_os2.h>
 #include <cmsis_os.h>
 #include <cstring>
 
+// Khai báo biến extern và một số biến toàn cục khác
 extern void gameTask(void *argument);
 osThreadId_t gameTaskHandle;
 uint8_t hearts = 3;
@@ -16,14 +18,18 @@ extern osMessageQueueId_t Queue4Handle;
 
 GameScreenView::GameScreenView()
 {
+
+	 // Khởi tạo đối tượng Game và các thành phần đồ họa trên màn hình game
 	gameInstance = Game();
 	remove(menu_button);
 	remove(score_holder);
 	// Prepare ship
+	// Chuẩn bị hình ảnh cho tàu và thiết lập vị trí ban đầu
 	shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_MAIN_ID));
 	shipImage.setXY(gameInstance.ship.coordinateX, gameInstance.ship.coordinateY);
 	add(shipImage);
 
+	 // Chuẩn bị hình ảnh cho đạn của tàu và đạn của kẻ địch, thiết lập vị trí ban đầu và trạng thái ẩn
 	for(int i=0;i<MAX_BULLET;i++) {
 		enemyBulletImage[i].setXY(321, 33);
     enemyBulletImage[i].setBitmap(touchgfx::Bitmap(BITMAP_ENEMY_BULLET_RED_ID));
@@ -31,6 +37,7 @@ GameScreenView::GameScreenView()
     shipBulletImage[i].setBitmap(touchgfx::Bitmap(BITMAP_BULLET_DOUBLE_ID));
 	}
 
+	  // Chuẩn bị hình ảnh cho các kẻ địch, sử dụng chuyển đổi màu cho từng loại kẻ địch và thiết lập thời gian cập nhật hình ảnh
 	for(int i=0;i<MAX_ENEMY;i++) {
 		switch(i%3) {
 		case 0:
@@ -45,6 +52,7 @@ GameScreenView::GameScreenView()
 		default:
 			break;
 		}
+		// thiết lập khoảng thời gian giữa 2 lần cập nhật hình ảnh
 		enemyImage[i].setUpdateTicksInterval(20);
 	}
 
@@ -54,12 +62,16 @@ GameScreenView::GameScreenView()
 void GameScreenView::setupScreen()
 {
 	GameScreenViewBase::setupScreen();
+
+	// Kết thúc task game trước khi bắt đầu màn hình game mới (đảm bảo không có task game nào đang chạy)
   osThreadTerminate(gameTaskHandle);
 	const osThreadAttr_t gameTask_attributes = {
-	  .name = "gameTask",
-	  .stack_size = 8192 * 2,
-	  .priority = (osPriority_t) osPriorityNormal,
+	  .name = "gameTask", // Tên của task là "gameTask"
+	  .stack_size = 8192 * 2,  // Kích thước của stack được cấp phát cho task là 8192 * 2 bytes
+	  .priority = (osPriority_t) osPriorityNormal, // Ưu tiên của task được đặt là osPriorityNormal (ưu tiên bình thường)
 	};
+
+	  // Tạo một task mới có các thuộc tính đã được khai báo trước đó
 	gameTaskHandle = osThreadNew(gameTask, NULL, &gameTask_attributes);
 	shouldEndGame = false;
 	shouldStopTask = false;

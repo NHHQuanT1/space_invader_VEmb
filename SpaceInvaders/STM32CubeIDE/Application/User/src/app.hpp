@@ -1,8 +1,5 @@
 /*
  * app.hpp
- *
- *  Created on: Aug 14, 2022
- *      Author: QuangLV
  */
 
 #ifndef APPLICATION_USER_SRC_APP_HPP_

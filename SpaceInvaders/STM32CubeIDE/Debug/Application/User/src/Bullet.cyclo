@@ -1,0 +1,4 @@
+Bullet.cpp:21:1:Bullet::~Bullet()	1
+Bullet.cpp:21:1:virtual Bullet::~Bullet()	1
+Bullet.cpp:7:1:Bullet::Bullet()	1
+Bullet.cpp:25:6:bool Bullet::update(uint8_t)	6

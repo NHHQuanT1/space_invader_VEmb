@@ -1,0 +1,5 @@
+GameScreenPresenter.hpp:28:13:GameScreenPresenter::~GameScreenPresenter()	1
+GameScreenPresenter.cpp:10:6:virtual void GameScreenPresenter::activate()	1
+GameScreenPresenter.hpp:28:13:virtual GameScreenPresenter::~GameScreenPresenter()	1
+GameScreenPresenter.hpp:28:13:virtual void* GameScreenPresenter::_ZThn4_N19GameScreenPresenterD1Ev()	1
+GameScreenPresenter.cpp:4:1:GameScreenPresenter::GameScreenPresenter(GameScreenView&)	1

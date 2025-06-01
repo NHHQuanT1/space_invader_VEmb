@@ -33,8 +33,7 @@
               "Green": 255,
               "Blue": 255
             },
-            "TextRotation": "0",
-            "Style": "Style12"
+            "TextRotation": "0"
           }
         ],
         "Interactions": [
@@ -153,8 +152,7 @@
               "Green": 255,
               "Blue": 255
             },
-            "TextRotation": "0",
-            "Style": "Style12"
+            "TextRotation": "0"
           }
         ],
         "Interactions": [
@@ -191,7 +189,6 @@
     "SelectedColorDepth": 16,
     "StartupScreenName": "MenuScreen",
     "SelectedStartupLanguage": "GB",
-    "Skin": "Dark",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",
     "UIPath": ".",
     "AvailableColorDepths": [
@@ -230,11 +227,12 @@
     "PortraitSkinY": 0,
     "DisplayOrientation": "Portrait",
     "Family": "STM32F4",
+    "SubFamily": "STM32F429/439",
     "Platform": "m4",
     "ProjectFile": "../STM32F429I_DISCO_REV_E01.ioc",
     "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
     "OptionalComponents": []
   },
-  "Version": "4.20.0",
+  "Version": "4.22.0",
   "CreatedBy": "4.20.0"
 }
