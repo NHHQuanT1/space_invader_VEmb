@@ -490,6 +490,36 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Dark_Buttons_Square_small_pressed.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_bullet-double.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_bullet-double.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_enemy-bullet-green.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-bullet-green.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_enemy-bullet-red.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-bullet-red.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_enemy-bullet-yellow.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-bullet-yellow.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_enemy-green-01.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-green-01.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_enemy-green-02.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-green-02.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_enemy-red-01.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-red-01.cpp</locationURI>
@@ -500,9 +530,34 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-red-02.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_enemy-yellow-01.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-yellow-01.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_enemy-yellow-02.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_enemy-yellow-02.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_heart.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_heart.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ship-left.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ship-left.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ship-main.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ship-main.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_ship-right.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ship-right.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_title.cpp</name>

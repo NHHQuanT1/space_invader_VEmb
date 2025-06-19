@@ -67,6 +67,14 @@ Application/User/generated/FrontendApplicationBase.o: \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\app.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Game.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Ship.hpp \
+ ../../TouchGFX/generated/images/include/BitmapDatabase.hpp \
+ ../../TouchGFX/generated/images/include/images/BitmapDatabase.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Entity.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Bullet.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Enemy.hpp \
  ../../TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp
@@ -137,6 +145,14 @@ Application/User/generated/FrontendApplicationBase.o: \
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\app.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Game.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Ship.hpp:
+../../TouchGFX/generated/images/include/BitmapDatabase.hpp:
+../../TouchGFX/generated/images/include/images/BitmapDatabase.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Entity.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Bullet.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Enemy.hpp:
 ../../TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp:

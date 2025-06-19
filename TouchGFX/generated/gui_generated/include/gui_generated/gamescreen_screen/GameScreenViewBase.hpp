@@ -37,6 +37,14 @@ protected:
     touchgfx::TextAreaWithOneWildcard score_holder;
     touchgfx::AnimatedImage animatedImage1;
 
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t SCORE_BOARD_SIZE = 5;
+    touchgfx::Unicode::UnicodeChar score_boardBuffer[SCORE_BOARD_SIZE];
+    static const uint16_t SCORE_HOLDER_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar score_holderBuffer[SCORE_HOLDER_SIZE];
+
 private:
 
     /*

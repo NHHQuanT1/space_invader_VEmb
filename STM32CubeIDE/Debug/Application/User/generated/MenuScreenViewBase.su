@@ -29,4 +29,4 @@ C:/HeNhung/MyApplication/TouchGFX/generated/gui_generated/src/menuscreen_screen/
 C:/HeNhung/MyApplication/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:39:6:void MenuScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton&)	8	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:343:10:void touchgfx::Drawable::setXY(int16_t, int16_t)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:132:10:void touchgfx::ButtonWithLabel::updateTextPosition()	24	static
-C:/HeNhung/MyApplication/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:9:1:MenuScreenViewBase::MenuScreenViewBase()	40	static
+C:/HeNhung/MyApplication/TouchGFX/generated/gui_generated/src/menuscreen_screen/MenuScreenViewBase.cpp:9:1:MenuScreenViewBase::MenuScreenViewBase()	32	static

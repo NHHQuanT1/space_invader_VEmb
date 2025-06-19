@@ -46,6 +46,7 @@ Application/User/TouchGFX/target/generated \
 Application/User \
 Application/User/generated \
 Application/User/gui \
+Application/User/src \
 Drivers/BSP/Components \
 Drivers/CMSIS \
 Drivers/STM32F4xx_HAL_Driver \

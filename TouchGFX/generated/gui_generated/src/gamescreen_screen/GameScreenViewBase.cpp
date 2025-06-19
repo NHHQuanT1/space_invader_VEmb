@@ -36,12 +36,16 @@ GameScreenViewBase::GameScreenViewBase() :
     score_board.setPosition(7, 4, 96, 29);
     score_board.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     score_board.setLinespacing(0);
+    Unicode::snprintf(score_boardBuffer, SCORE_BOARD_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ZEDX).getText());
+    score_board.setWildcard(score_boardBuffer);
     score_board.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FXQT));
     add(score_board);
 
     score_holder.setPosition(0, 115, 240, 34);
     score_holder.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     score_holder.setLinespacing(0);
+    score_holderBuffer[0] = 0;
+    score_holder.setWildcard(score_holderBuffer);
     score_holder.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CFD2));
     add(score_holder);
 

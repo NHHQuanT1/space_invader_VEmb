@@ -69,6 +69,14 @@ Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.o: \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\app.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Game.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Ship.hpp \
+ ../../TouchGFX/generated/images/include/BitmapDatabase.hpp \
+ ../../TouchGFX/generated/images/include/images/BitmapDatabase.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Entity.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Bullet.hpp \
+ C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Enemy.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CWRVectorRenderer.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainterColor.hpp \
@@ -199,6 +207,14 @@ Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.o: \
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextArea.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\app.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Game.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Ship.hpp:
+../../TouchGFX/generated/images/include/BitmapDatabase.hpp:
+../../TouchGFX/generated/images/include/images/BitmapDatabase.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Entity.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Bullet.hpp:
+C:\HeNhung\MyApplication\STM32CubeIDE\Application\User\src\Enemy.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CWRVectorRenderer.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainterColor.hpp:

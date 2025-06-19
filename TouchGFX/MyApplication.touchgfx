@@ -118,7 +118,11 @@
               "Green": 255,
               "Blue": 255
             },
-            "Wildcard1": {}
+            "Wildcard1": {
+              "TextId": "__SingleUse_ZEDX",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
           },
           {
             "Type": "TextArea",
@@ -133,7 +137,10 @@
               "Green": 255,
               "Blue": 255
             },
-            "Wildcard1": {}
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
           },
           {
             "Type": "AnimatedImage",
