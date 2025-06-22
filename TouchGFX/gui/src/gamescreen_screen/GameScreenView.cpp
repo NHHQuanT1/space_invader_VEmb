@@ -236,11 +236,9 @@ void GameScreenView::handleTickEvent() {
 		// If player is out of health
 		if (hearts < 1) {
 			shouldStopTask = true;
-			invalidate();
 		}
 	}
 
 	Unicode::snprintf(score_boardBuffer, SCORE_BOARD_SIZE, "%d",
 			gameInstance.score);
-	invalidate();
 }
