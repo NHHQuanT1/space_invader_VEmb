@@ -21,6 +21,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "app_touchgfx.h"
+#include "stdio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -63,6 +64,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc2;
 
 CRC_HandleTypeDef hcrc;
 
@@ -114,6 +116,7 @@ static void MX_FMC_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_DMA2D_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_ADC2_Init(void);
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 
@@ -146,6 +149,22 @@ void IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
 uint8_t IOE_Read(uint8_t Addr, uint8_t Reg);
 uint16_t IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *pBuffer,
 		uint16_t Length);
+
+uint32_t ReadJoystickX() {
+    HAL_ADC_Start(&hadc1);
+    HAL_ADC_PollForConversion(&hadc1, 10);
+    uint32_t value = HAL_ADC_GetValue(&hadc1);
+    HAL_ADC_Stop(&hadc1);
+    return value;
+}
+
+uint32_t ReadJoystickY() {
+    HAL_ADC_Start(&hadc2);
+    HAL_ADC_PollForConversion(&hadc2, 10);
+    uint32_t value = HAL_ADC_GetValue(&hadc2);
+    HAL_ADC_Stop(&hadc2);
+    return value;
+}
 
 /* USER CODE END PFP */
 
@@ -193,6 +212,7 @@ int main(void)
   MX_LTDC_Init();
   MX_DMA2D_Init();
   MX_ADC1_Init();
+  MX_ADC2_Init();
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
@@ -354,6 +374,58 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
+
+}
+
+/**
+  * @brief ADC2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC2_Init(void)
+{
+
+  /* USER CODE BEGIN ADC2_Init 0 */
+
+  /* USER CODE END ADC2_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC2_Init 1 */
+
+  /* USER CODE END ADC2_Init 1 */
+
+  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
+  */
+  hadc2.Instance = ADC2;
+  hadc2.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+  hadc2.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc2.Init.ScanConvMode = DISABLE;
+  hadc2.Init.ContinuousConvMode = DISABLE;
+  hadc2.Init.DiscontinuousConvMode = DISABLE;
+  hadc2.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc2.Init.NbrOfConversion = 1;
+  hadc2.Init.DMAContinuousRequests = DISABLE;
+  hadc2.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  if (HAL_ADC_Init(&hadc2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC2_Init 2 */
+
+  /* USER CODE END ADC2_Init 2 */
 
 }
 
@@ -663,7 +735,6 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(SPI5_NCS_GPIO_Port, SPI5_NCS_Pin, GPIO_PIN_SET);
 
-
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_RESET);
 
@@ -704,7 +775,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /* USER CODE BEGIN MX_GPIO_Init_2 *//*Configure GPIO pins : PA1 PA2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
   GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -1033,53 +1104,14 @@ void StartDefaultTask(void *argument)
 	uint8_t msg;
 	uint32_t x, y;
 	for (;;) {
-		x = HAL_ADC_GetValue(ADC_CHANNEL_1);
-		y = HAL_ADC_GetValue(ADC_CHANNEL_2);
-//		//pg2
-//		count1 = osMessageQueueGetCount(Queue1Handle);
-//		if (count1 < 1) {
-//			if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2) == GPIO_PIN_RESET) {
-//				x1 = 'R';
-//			} else {
-//				x1 = 'N';
-//			}
-//			osMessageQueuePut(Queue1Handle, &x1, 0, 100);
-//		}
-//		//pg3
-//		count2 = osMessageQueueGetCount(Queue2Handle);
-//		if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3) == GPIO_PIN_RESET) {
-//			if (count2 < 1) {
-//				x2 = 'L';
-//			} else {
-//				x2 = 'N';
-//			}
-//			osMessageQueuePut(Queue2Handle, &x2, 0, 100);
-//		}
-//		//pg4
-//		count3 = osMessageQueueGetCount(Queue3Handle);
-//		if (count3 < 1) {
-//			if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4) == GPIO_PIN_RESET) {
-//				x3 = 'U';
-//			} else {
-//				x3 = 'N';
-//			}
-//			osMessageQueuePut(Queue3Handle, &x3, 0, 100);
-//		}
-//		//pg5
-//		count4 = osMessageQueueGetCount(Queue4Handle);
-//		if (count4 < 1) {
-//			if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5) == GPIO_PIN_RESET) {
-//				x4 = 'D';
-//			} else {
-//				x4 = 'N';
-//			}
-//			osMessageQueuePut(Queue4Handle, &x4, 0, 100);
-//		}
+		x = ReadJoystickX();
+		y = ReadJoystickY();
 
-		if (x > 3000) { // Right
+		printf("Joystick X: %lu, Y: %lu\r\n", x, y);
+		if (x > 800) { // Right
 			msg = 'R';
 			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
-		} else if (x < 1000) { // Left
+		} else if (x < 10) { // Left
 			msg = 'L';
 			osMessageQueuePut(Queue2Handle, &msg, 0, 0);
 		} else { // Neutral
@@ -1089,10 +1121,10 @@ void StartDefaultTask(void *argument)
 		}
 
 		// ---- Y Axis handling ----
-		if (y > 3000) { // Up
+		if (y > 400) { // Up
 			msg = 'U';
 			osMessageQueuePut(Queue3Handle, &msg, 0, 0);
-		} else if (y < 1000) { // Down
+		} else if (y < 10) { // Down
 			msg = 'D';
 			osMessageQueuePut(Queue4Handle, &msg, 0, 0);
 		} else { // Neutral

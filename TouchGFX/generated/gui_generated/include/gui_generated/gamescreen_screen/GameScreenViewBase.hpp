@@ -40,7 +40,7 @@ protected:
     /*
      * Wildcard Buffers
      */
-    static const uint16_t SCORE_BOARD_SIZE = 5;
+    static const uint16_t SCORE_BOARD_SIZE = 10;
     touchgfx::Unicode::UnicodeChar score_boardBuffer[SCORE_BOARD_SIZE];
     static const uint16_t SCORE_HOLDER_SIZE = 10;
     touchgfx::Unicode::UnicodeChar score_holderBuffer[SCORE_HOLDER_SIZE];

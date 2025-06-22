@@ -121,7 +121,7 @@
             "Wildcard1": {
               "TextId": "__SingleUse_D88Q",
               "UseBuffer": true,
-              "BufferSize": 5
+              "BufferSize": 10
             }
           },
           {
