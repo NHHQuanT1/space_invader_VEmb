@@ -55,7 +55,9 @@ void gameTask(void *argument) {
 	for(;;) {
 		loopCount++;
 		// Nếu cờ kết thúc trò chơi và dừng task được đặt, thoát khỏi vòng lặp
-		if(shouldEndGame == true && shouldStopTask == true) break;
+		if(shouldEndGame == true && shouldStopTask == true) {
+			break;
+		}
 
 		// Nếu cờ kết thúc trò chơi đã được đặt, tiếp tục vòng lặp
 		else if(shouldEndGame) continue;
@@ -124,7 +126,7 @@ void gameTask(void *argument) {
 		for(int i=0;i<MAX_BULLET;i++) {
 			if(enemyBullet[i].displayStatus != IS_SHOWN) continue;
 			if(Entity::isCollide(enemyBullet[i], gameInstance.ship)) {
-				gameInstance.ship.updateShipHp(-1);
+				gameInstance.ship.updateShipHp(1);
 				enemyBullet[i].updateDisplayStatus(SHOULD_HIDE);
 				gameInstance.ship.updateCoordinate(104, 260);
 				break;
@@ -132,7 +134,9 @@ void gameTask(void *argument) {
 		}
 
 		// Nếu tàu hỏng hết máu, đặt cờ kết thúc trò chơi
-		if(gameInstance.ship.lives <= 0) shouldEndGame = true;
+		if(gameInstance.ship.lives <= 0) {
+			shouldEndGame = true;
+		}
 	}
 }
 

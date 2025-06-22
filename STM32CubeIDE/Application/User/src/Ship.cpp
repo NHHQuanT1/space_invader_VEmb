@@ -45,7 +45,7 @@ bool Ship::updateBullet(uint8_t dt) {
 }
 
 void Ship::updateShipHp(short change) {
- this->lives += change;
+ this->lives -= change;
 }
 
 void Ship::updateVelocityX(short X) {

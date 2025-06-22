@@ -92,12 +92,14 @@ void GameScreenView::handleTickEvent() {
 		add(score_holder);
 		menu_button.invalidate();
 		score_holder.invalidate();
+		invalidate();
 		shouldStopScreen = true;
 		osThreadTerminate(gameTaskHandle);
 	}
 
 	// Get input
 	uint8_t res = 0;
+
 	uint32_t count = osMessageQueueGetCount(Queue1Handle);
 	if (count > 0) {
 		osMessageQueueGet(Queue1Handle, &res, NULL, osWaitForever);
