@@ -95,13 +95,15 @@ const osThreadAttr_t GUI_Task_attributes = {
 /* USER CODE BEGIN PV */
 uint8_t isRevD = 0; /* Applicable only for STM32F429I DISCOVERY REVD and above */
 osMessageQueueId_t Queue1Handle;
-osMessageQueueId_t Queue2Handle;
+//osMessageQueueId_t Queue2Handle;
 osMessageQueueId_t Queue3Handle;
 osMessageQueueId_t Queue4Handle;
+osMessageQueueId_t Queue5Handle;
 const osMessageQueueAttr_t Queue1_attributes = { .name = "Queue1" };
-const osMessageQueueAttr_t Queue2_attributes = { .name = "Queue2" };
+//const osMessageQueueAttr_t Queue2_attributes = { .name = "Queue2" };
 const osMessageQueueAttr_t Queue3_attributes = { .name = "Queue3" };
 const osMessageQueueAttr_t Queue4_attributes = { .name = "Queue4" };
+const osMessageQueueAttr_t Queue5_attributes = { .name = "Queue5" };
 osStatus_t r_state;
 
 /* USER CODE END PV */
@@ -238,9 +240,10 @@ int main(void)
   /* USER CODE BEGIN RTOS_QUEUES */
 	/* add queues, ... */
 	Queue1Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue1_attributes);
-	Queue2Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue2_attributes);
+//	Queue2Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue2_attributes);
 	Queue3Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue3_attributes);
 	Queue4Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue4_attributes);
+	Queue5Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue5_attributes);
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -1108,16 +1111,15 @@ void StartDefaultTask(void *argument)
 		y = ReadJoystickY();
 
 		printf("Joystick X: %lu, Y: %lu\r\n", x, y);
-		if (x > 300) { // Right
+		if (x > 50) { // Right
 			msg = 'R';
 			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
 		} else if (x < 8) { // Left
 			msg = 'L';
-			osMessageQueuePut(Queue2Handle, &msg, 0, 0);
+			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
 		} else { // Neutral
 			msg = 'N';
 			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
-			osMessageQueuePut(Queue2Handle, &msg, 0, 0);
 		}
 
 		// ---- Y Axis handling ----

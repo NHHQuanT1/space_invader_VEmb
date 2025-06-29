@@ -12,9 +12,10 @@ osThreadId_t gameTaskHandle;
 uint8_t hearts = 3;
 bool shouldStopScreen;
 extern osMessageQueueId_t Queue1Handle;
-extern osMessageQueueId_t Queue2Handle;
+//extern osMessageQueueId_t Queue2Handle;
 extern osMessageQueueId_t Queue3Handle;
 extern osMessageQueueId_t Queue4Handle;
+extern osMessageQueueId_t Queue5Handle;
 
 GameScreenView::GameScreenView() {
 	// Khởi tạo đối tượng Game và các thành phần đồ họa trên màn hình game
@@ -65,6 +66,7 @@ void GameScreenView::setupScreen() {
 
 	// Kết thúc task game trước khi bắt đầu màn hình game mới (đảm bảo không có task game nào đang chạy)
 	osThreadTerminate(gameTaskHandle);
+	osMessageQueueReset(Queue5Handle);
 	const osThreadAttr_t gameTask_attributes = { .name = "gameTask", // Tên của task là "gameTask"
 			.stack_size = 8192 * 2, // Kích thước của stack được cấp phát cho task là 8192 * 2 bytes
 			.priority = (osPriority_t) osPriorityNormal, // Ưu tiên của task được đặt là osPriorityNormal (ưu tiên bình thường)
@@ -86,7 +88,14 @@ void GameScreenView::handleTickEvent() {
 	GameScreenViewBase::handleTickEvent();
 
 	// display end game screen
-	if (shouldEndGame && shouldStopTask && !shouldStopScreen) {
+	uint8_t stopFlag;
+	uint32_t count5 = osMessageQueueGetCount(Queue5Handle);
+	// get latest message
+	while (count5 > 0) {
+		osMessageQueueGet(Queue5Handle, &stopFlag, NULL, 0);
+		count5 --;
+	}
+	if (stopFlag == 1 && !shouldStopScreen) {
 		add(menu_button);
 		Unicode::snprintf(score_holderBuffer, SCORE_HOLDER_SIZE, "%d",
 				gameInstance.score);
@@ -94,6 +103,7 @@ void GameScreenView::handleTickEvent() {
 		menu_button.invalidate();
 		score_holder.invalidate();
 		invalidate();
+		shouldStopTask = true;
 		shouldStopScreen = true;
 		osThreadTerminate(gameTaskHandle);
 	}
@@ -107,22 +117,14 @@ void GameScreenView::handleTickEvent() {
 		if (res == 'R') {
 			gameInstance.ship.updateVelocityX(gameInstance.ship.VELOCITY);
 			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_RIGHT_ID));
-			osMessageQueueReset(Queue2Handle);
-		} else if (res == 'N') {
-			gameInstance.ship.updateVelocityX(0);
-			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_MAIN_ID));
-		}
-	}
-	uint32_t count2 = osMessageQueueGetCount(Queue2Handle);
-	if (count2 > 0) {
-		osMessageQueueGet(Queue2Handle, &res, NULL, osWaitForever);
-		if (res == 'L') {
-			gameInstance.ship.updateVelocityX(-gameInstance.ship.VELOCITY);
-			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_LEFT_ID));
 			osMessageQueueReset(Queue1Handle);
 		} else if (res == 'N') {
 			gameInstance.ship.updateVelocityX(0);
 			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_MAIN_ID));
+		} else {
+			gameInstance.ship.updateVelocityX(-gameInstance.ship.VELOCITY);
+			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_LEFT_ID));
+			osMessageQueueReset(Queue1Handle);
 		}
 	}
 
@@ -238,7 +240,6 @@ void GameScreenView::handleTickEvent() {
 			heart_01.setAlpha(255);
 		// If player is out of health
 		if (hearts < 1) {
-			shouldStopTask = true;
 			invalidate();
 		}
 	}

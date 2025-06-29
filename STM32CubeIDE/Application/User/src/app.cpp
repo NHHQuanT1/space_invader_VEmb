@@ -32,12 +32,14 @@ void updateEnemyBullet(uint8_t dt);
 // Biến lưu thời gian đã trôi qua
 uint8_t dt = 0;
 
+extern osMessageQueueId_t Queue5Handle;
+
 // Nhiệm vụ của task game
 void gameTask(void *argument) {
 	int loopCount = 0;
 
 	// Khởi tạo vị trí và trạng thái ban đầu cho đạn và kẻ địch
-	for(int i=0; i<MAX_BULLET;i++) {
+	for (int i = 0; i < MAX_BULLET; i++) {
 		shipBullet[i].updateCoordinate(-50, -50);
 		enemyBullet[i].updateCoordinate(-50, -50);
 		shipBullet[i].updateVelocity(0, -5);
@@ -46,33 +48,30 @@ void gameTask(void *argument) {
 		enemyBullet[i].updateDisplayStatus(IS_HIDDEN);
 	}
 
-	for(int i=0; i<MAX_ENEMY;i++) {
+	for (int i = 0; i < MAX_ENEMY; i++) {
 		enemy[i].updateCoordinate(-50, -50);
 		enemy[i].updateDisplayStatus(IS_HIDDEN);
 	}
 
 //	uint32_t previousTick = 0, currentTick = 0;
-	for(;;) {
+	for (;;) {
 		loopCount++;
 		// Nếu cờ kết thúc trò chơi và dừng task được đặt, thoát khỏi vòng lặp
-		if(shouldEndGame == true && shouldStopTask == true) {
+		if (shouldEndGame == true && shouldStopTask == true) {
 			break;
 		}
 
 		// Nếu cờ kết thúc trò chơi đã được đặt, tiếp tục vòng lặp
-		else if(shouldEndGame) continue;
+		else if (shouldEndGame)
+			continue;
 
 		// Xác định thời gian đã trôi qua từ lần cập nhật trước đó
-		if(loopCount >= 2) {
+		if (loopCount >= 2) {
 			dt = 1;
 			loopCount = 0;
 		} else {
 			dt = 0;
 		}
-//		currentTick = xTaskGetTickCount();
-//		dt = currentTick - previousTick;
-//		dt = dt > 0 ? dt : 1;
-//		previousTick = currentTick;
 		/*  UPDATE POSITIONS */
 
 		// Cập nhật vị trí tàu và các đối tượng trong trò chơi
@@ -91,16 +90,15 @@ void gameTask(void *argument) {
 		// update enemy bullet position
 		updateEnemyBullet(dt);
 
-
 		/*  CHECK COLLISIONS */
 
 		// check enemy and ship collision
-
 		// Kiểm tra va chạm giữa các đối tượng
 		// Kiểm tra va chạm giữa tàu và kẻ địch
-		for(int i=0;i<MAX_ENEMY;i++) {
-			if(enemy[i].displayStatus != IS_SHOWN) continue;
-			if(Entity::isCollide(enemy[i], gameInstance.ship)) {
+		for (int i = 0; i < MAX_ENEMY; i++) {
+			if (enemy[i].displayStatus != IS_SHOWN)
+				continue;
+			if (Entity::isCollide(enemy[i], gameInstance.ship)) {
 				gameInstance.ship.updateShipHp(-1);
 				enemy[i].updateDisplayStatus(SHOULD_HIDE);
 				gameInstance.ship.updateCoordinate(104, 260);
@@ -109,11 +107,13 @@ void gameTask(void *argument) {
 		}
 
 		// Kiểm tra va chạm giữa kẻ địch và đạn của tàu
-		for(int i=0;i<MAX_ENEMY;i++) {
-			if(enemy[i].displayStatus != IS_SHOWN) continue;
-			for(int j=0;j<MAX_BULLET;j++) {
-				if(shipBullet[j].displayStatus != IS_SHOWN) continue;
-				if(Entity::isCollide(enemy[i], shipBullet[j])) {
+		for (int i = 0; i < MAX_ENEMY; i++) {
+			if (enemy[i].displayStatus != IS_SHOWN)
+				continue;
+			for (int j = 0; j < MAX_BULLET; j++) {
+				if (shipBullet[j].displayStatus != IS_SHOWN)
+					continue;
+				if (Entity::isCollide(enemy[i], shipBullet[j])) {
 					enemy[i].updateDisplayStatus(SHOULD_HIDE);
 					shipBullet[j].updateDisplayStatus(SHOULD_HIDE);
 					gameInstance.updateScore(5);
@@ -123,9 +123,10 @@ void gameTask(void *argument) {
 		}
 
 		// Kiểm tra va chạm giữa tàu và đạn của kẻ địch
-		for(int i=0;i<MAX_BULLET;i++) {
-			if(enemyBullet[i].displayStatus != IS_SHOWN) continue;
-			if(Entity::isCollide(enemyBullet[i], gameInstance.ship)) {
+		for (int i = 0; i < MAX_BULLET; i++) {
+			if (enemyBullet[i].displayStatus != IS_SHOWN)
+				continue;
+			if (Entity::isCollide(enemyBullet[i], gameInstance.ship)) {
 				gameInstance.ship.updateShipHp(1);
 				enemyBullet[i].updateDisplayStatus(SHOULD_HIDE);
 				gameInstance.ship.updateCoordinate(104, 260);
@@ -134,24 +135,34 @@ void gameTask(void *argument) {
 		}
 
 		// Nếu tàu hết máu, đặt cờ kết thúc trò chơi
-		if(gameInstance.ship.lives <= 0) {
+		uint8_t msg;
+		if (gameInstance.ship.lives <= 0) {
 			shouldEndGame = true;
-			shouldStopTask = true;
+			while (!shouldStopTask) {
+				msg = 1;
+				osMessageQueuePut(Queue5Handle, &msg, 0, 0);
+				osDelay(10); // Small delay to yield CPU
+			}
+			break;
+		} else {
+			msg = '0';
+			osMessageQueuePut(Queue5Handle, &msg, 0, 0);
 		}
 	}
 }
 
 // Cập nhật vị trí của kẻ địch
 void updateEnemy(uint8_t dt) {
-	spawnRate -=dt;
-	for(int i=0;i<MAX_ENEMY;i++) {
+	spawnRate -= dt;
+	for (int i = 0; i < MAX_ENEMY; i++) {
 		// Nếu kẻ địch đang hiển thị, tiếp tục cập nhật vị trí
-		if(enemy[i].displayStatus != IS_HIDDEN) {
+		if (enemy[i].displayStatus != IS_HIDDEN) {
 			enemy[i].update(dt);
 			continue;
 		}
 
-		if(spawnRate > 0) continue;
+		if (spawnRate > 0)
+			continue;
 
 		uint16_t ex = 0;
 		uint16_t ey = 0;
@@ -159,7 +170,7 @@ void updateEnemy(uint8_t dt) {
 		uint16_t vy = 0;
 
 		// Tạo mới kẻ địch từ vị trí và hướng di chuyển đã được xác định bởi spawnSeed
-		if(spawnSeed%2) {
+		if (spawnSeed % 2) {
 			ex = -32;
 			vx = 1;
 		} else {
@@ -168,7 +179,7 @@ void updateEnemy(uint8_t dt) {
 		}
 
 		// hàng chẵn và hàng lẻ
-		switch(spawnSeed) {
+		switch (spawnSeed) {
 		case 0:
 			ey = 42;
 			break;
@@ -185,7 +196,7 @@ void updateEnemy(uint8_t dt) {
 			break;
 		}
 		// Xác định hướng di chuyển dọc của kẻ địch bằng cách cập nhật lại spawnSeed
-		if(spawnSeed >= 3) {
+		if (spawnSeed >= 3) {
 			spawnSeed = 0;
 		} else {
 			spawnSeed++;
@@ -204,42 +215,47 @@ void updateEnemy(uint8_t dt) {
 void updateShipBullet(uint8_t dt) {
 	// kiem tra tau con het dan chua
 	bool shouldFire = gameInstance.ship.updateBullet(dt);
-	for(int i=0; i<MAX_BULLET;i++) {
-			if(shipBullet[i].displayStatus != IS_HIDDEN) {
-				shipBullet[i].update(dt);
-				continue;
-			}
-
-			if(shouldFire) {
-				shipBullet[i].updateCoordinate(sx, sy - 16);
-				shipBullet[i].updateDisplayStatus(SHOULD_SHOW);
-				shouldFire = false;
-			}
+	for (int i = 0; i < MAX_BULLET; i++) {
+		if (shipBullet[i].displayStatus != IS_HIDDEN) {
+			shipBullet[i].update(dt);
+			continue;
 		}
+
+		if (shouldFire) {
+			shipBullet[i].updateCoordinate(sx, sy - 16);
+			shipBullet[i].updateDisplayStatus(SHOULD_SHOW);
+			shouldFire = false;
+		}
+	}
 }
 
 // Cập nhật vị trí của đạn từ kẻ địch
 
 void updateEnemyBullet(uint8_t dt) {
-	for(int j=0; j<MAX_ENEMY;j++) {
-		if(enemy[j].displayStatus != IS_SHOWN) continue;
+	for (int j = 0; j < MAX_ENEMY; j++) {
+		if (enemy[j].displayStatus != IS_SHOWN)
+			continue;
 
 		// kiem tra ke dich con dan khong
-		if(enemy[j].updateBullet(dt) == false) continue;
+		if (enemy[j].updateBullet(dt) == false)
+			continue;
 
-		for(int i=0; i<MAX_BULLET;i++) {
-			if(enemyBullet[i].displayStatus != IS_HIDDEN) continue;
+		for (int i = 0; i < MAX_BULLET; i++) {
+			if (enemyBullet[i].displayStatus != IS_HIDDEN)
+				continue;
 
 			// Tạo mới đạn từ kẻ địch và hiển thị lên màn hình
-			enemyBullet[i].updateCoordinate(enemy[j].coordinateX, enemy[j].coordinateY + 16);
+			enemyBullet[i].updateCoordinate(enemy[j].coordinateX,
+					enemy[j].coordinateY + 16);
 			enemyBullet[i].updateDisplayStatus(SHOULD_SHOW);
 			break;
 		}
 	}
 
 	// Cập nhật vị trí của các đạn từ kẻ địch đã xuất hiện
-	for(int i=0; i<MAX_BULLET;i++) {
-		if(enemyBullet[i].displayStatus != IS_SHOWN) continue;
+	for (int i = 0; i < MAX_BULLET; i++) {
+		if (enemyBullet[i].displayStatus != IS_SHOWN)
+			continue;
 		enemyBullet[i].update(dt);
 	}
 
