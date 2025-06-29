@@ -68,12 +68,16 @@ _Cách nối dây, kết nối giữa các linh kiện_
 - Giải thích một số hàm quan trọng: ý nghĩa của hàm, tham số vào, ra
 
   ```C
-     /**
-      *  Hàm tính ...
-      *  @param  x  Tham số
-      *  @param  y  Tham số
+     // Hàm cập nhật vị trí của kẻ địch
+    /**
+      *  Hàm updateEnemy quản lý di chuyển và tạo kể địch mới, sử dụng RNG phần cứng để tạo ngẫu nhiên.
+
+      *  Tham số @param dt: khoảng thời gian trôi qua, để cập nhật vị trí và giảm spawnRate
+      Các hàm con (update, updateCoordinate, updateVelocity, updateDisplayStatus) xử lý vị trí, vận tốc, và trạng thái hiển thị
       */
-     void abc(int x, int y = 2);
+    void updateEnemy(uint8_t dt) {
+        ...
+        }
   ```
 
 ### KẾT QUẢ
