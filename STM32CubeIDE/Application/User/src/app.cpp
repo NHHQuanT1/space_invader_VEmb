@@ -7,6 +7,8 @@
 #include "task.h"
 #include "timers.h"
 #include "stack_macros.h"
+#include "main.h"
+#include "cmsis_os2.h"
 
 // Khởi tạo đối tượng trò chơi và các mảng đạn và kẻ địch
 Game gameInstance;
@@ -99,7 +101,7 @@ void gameTask(void *argument) {
 			if (enemy[i].displayStatus != IS_SHOWN)
 				continue;
 			if (Entity::isCollide(enemy[i], gameInstance.ship)) {
-				gameInstance.ship.updateShipHp(-1);
+				gameInstance.ship.updateShipHp(1);
 				enemy[i].updateDisplayStatus(SHOULD_HIDE);
 				gameInstance.ship.updateCoordinate(104, 260);
 				break;
@@ -117,6 +119,9 @@ void gameTask(void *argument) {
 					enemy[i].updateDisplayStatus(SHOULD_HIDE);
 					shipBullet[j].updateDisplayStatus(SHOULD_HIDE);
 					gameInstance.updateScore(5);
+					HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET);
+					osDelay(50);
+					HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_RESET);
 					break;
 				}
 			}
