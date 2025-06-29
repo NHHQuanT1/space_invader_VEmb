@@ -6,16 +6,13 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
-      <Text Id="__SingleUse_D88Q" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">0</Translation>
-      </Text>
-      <Text Id="score_boardBuffer" Alignment="Left" TypographyId="Default">
+      <Text Id="__SingleUse_D88Q" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_CFD2" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">SCORE: &lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_FXQT" Alignment="Left" TypographyId="Default">
+      <Text Id="__SingleUse_FXQT" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_24XT" Alignment="Center" TypographyId="Default">
@@ -27,9 +24,8 @@
     </TextGroup>
   </Texts>
   <Typographies>
-    <Typography Id="Default" Font="verdana.ttf" Size="24" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Default" Font="verdana.ttf" Size="24" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
-    <Typography Id="font" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
   </Typographies>
 </TextDatabase>

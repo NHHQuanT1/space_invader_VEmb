@@ -1108,10 +1108,10 @@ void StartDefaultTask(void *argument)
 		y = ReadJoystickY();
 
 		printf("Joystick X: %lu, Y: %lu\r\n", x, y);
-		if (x > 800) { // Right
+		if (x > 300) { // Right
 			msg = 'R';
 			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
-		} else if (x < 10) { // Left
+		} else if (x < 8) { // Left
 			msg = 'L';
 			osMessageQueuePut(Queue2Handle, &msg, 0, 0);
 		} else { // Neutral
@@ -1121,10 +1121,10 @@ void StartDefaultTask(void *argument)
 		}
 
 		// ---- Y Axis handling ----
-		if (y > 400) { // Up
+		if (y > 100) { // Up
 			msg = 'U';
 			osMessageQueuePut(Queue3Handle, &msg, 0, 0);
-		} else if (y < 10) { // Down
+		} else if (y < 8) { // Down
 			msg = 'D';
 			osMessageQueuePut(Queue4Handle, &msg, 0, 0);
 		} else { // Neutral

@@ -11,7 +11,6 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE;
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     23, // T___SINGLEUSE_D88Q: "0"
-    23, // T_SCORE_BOARDBUFFER: "0"
     0,  // T___SINGLEUSE_CFD2: "SCORE: <>"
     7,  // T___SINGLEUSE_FXQT: "<>"
     9,  // T___SINGLEUSE_24XT: "GO BACK"

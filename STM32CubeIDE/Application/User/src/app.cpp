@@ -133,9 +133,10 @@ void gameTask(void *argument) {
 			}
 		}
 
-		// Nếu tàu hỏng hết máu, đặt cờ kết thúc trò chơi
+		// Nếu tàu hết máu, đặt cờ kết thúc trò chơi
 		if(gameInstance.ship.lives <= 0) {
 			shouldEndGame = true;
+			shouldStopTask = true;
 		}
 	}
 }

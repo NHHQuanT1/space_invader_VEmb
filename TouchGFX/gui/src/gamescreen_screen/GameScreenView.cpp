@@ -85,6 +85,7 @@ void GameScreenView::tearDownScreen() {
 void GameScreenView::handleTickEvent() {
 	GameScreenViewBase::handleTickEvent();
 
+	// display end game screen
 	if (shouldEndGame && shouldStopTask && !shouldStopScreen) {
 		add(menu_button);
 		Unicode::snprintf(score_holderBuffer, SCORE_HOLDER_SIZE, "%d",
