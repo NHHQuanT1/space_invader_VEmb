@@ -174,8 +174,15 @@ void updateEnemy(uint8_t dt) {
 		uint16_t vx;
 		uint16_t vy = 0;
 
-		// Tạo mới kẻ địch từ vị trí và hướng di chuyển đã được xác định bởi spawnSeed
-		if (spawnSeed % 2) {
+		// --- Use hardware RNG for randomness ---
+		uint32_t randValue = 0;
+		if (HAL_RNG_GenerateRandomNumber(&hrng, &randValue) != HAL_OK) {
+			randValue = 0; // fallback if RNG fails
+		}
+		uint8_t randSpawn = randValue % 4; // 0..3
+		uint8_t randSide = (randValue >> 8) & 0x01; // 0 or 1
+
+		if (randSide) {
 			ex = -32;
 			vx = 1;
 		} else {
@@ -183,8 +190,7 @@ void updateEnemy(uint8_t dt) {
 			vx = -1;
 		}
 
-		// hàng chẵn và hàng lẻ
-		switch (spawnSeed) {
+		switch (randSpawn) {
 		case 0:
 			ey = 42;
 			break;
@@ -198,14 +204,10 @@ void updateEnemy(uint8_t dt) {
 			ey = 160;
 			break;
 		default:
+			ey = 42;
 			break;
 		}
-		// Xác định hướng di chuyển dọc của kẻ địch bằng cách cập nhật lại spawnSeed
-		if (spawnSeed >= 3) {
-			spawnSeed = 0;
-		} else {
-			spawnSeed++;
-		}
+
 		// Cập nhật thông tin của kẻ địch và hiển thị lên màn hình
 		enemy[i].updateCoordinate(ex, ey);
 		enemy[i].updateVelocity(vx, vy);
