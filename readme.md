@@ -1,8 +1,82 @@
-# STM32F429I_DISCO_REV_D01 TBS
+# GAME SPACE INVADER
 
-The default IDE is set to STM32CubeIDE, to change IDE open the STM32F429I_DISCO_REV_D01.ioc with STM32CubeMX and select from the supported IDEs (EWARM from version 8.50.9, MDK-ARM, and STM32CubeIDE). Supports flashing of the STM32F429I_DISCO_DEV_D01 board directly from TouchGFX Designer using GCC and STM32CubeProgrammer. Flashing the board requires STM32CubeProgrammer which can be downloaded from the ST webpage. 
+Nội dung cần báo cáo của môn đồ án:
 
-This TBS is configured for 320 x 240 pixels 16bpp screen resolution.  
+> "Mô phỏng trò chơi Space Invader, sử dụng joystick để điều khiển.
+> Yêu cầu:
+>
+> - Dùng hardware random generator để sinh quái ngẫu nhiên.
+> - Có âm thanh phát ra bằng còi buzzer."
 
-Performance testing can be done using the GPIO pins designated with the following signals: VSYNC_FREQ  - Pin PE2, RENDER_TIME - Pin PE3, FRAME_RATE  - Pin PE4, MCU_ACTIVE  - Pin PE5
- 
+## GIỚI THIỆU
+
+**Đề bài**: _Mô phỏng trò chơi Space Invader_
+
+**Sản phẩm:**
+
+1. Di chuyển 4 hướng bằng Joystick.
+2. Tích luỹ điểm khi tiêu diệt quái, kết thúc khi trò chơi vượt quá giới hạn 3 mạng khi tàu bị bắn trúng hoặc va phải quái.
+3. Tạo ra quái vị trí ngẫu nhiên.
+4. Phát ra âm thanh và sáng led LD3 khi tiêu diệt quái.
+
+- Ảnh chụp minh họa:\
+  ![Ảnh minh họa](images/space_inavader.jpg)
+
+## TÁC GIẢ
+
+- Tên nhóm: VEmb
+- Thành viên trong nhóm
+  |STT|Họ tên|MSSV|Công việc|
+  |--:|--|--|--|
+  |1|Nguyễn Hiệp Hồng Quân|20215633|Tạo quái hiển thị ngẫu nhiên, kết nối joystick, kết nối còi buzeer và led LD3 khi tiêu diệt quái|
+  |2|Nguyễn Thành Bách|20204812|Tạo giao diện game, xử lý logic tiêu diệt quái, điểm số, số mạng, điều khiển joystick|
+
+## MÔI TRƯỜNG HOẠT ĐỘNG
+
+- Sử dụng vi điều khiển STM32F429-DISC (cụ thể STM32F429ZIT6).
+- Sử dụng joystick, còi buzzer.
+
+## SƠ ĐỒ SCHEMATIC
+
+_Cách nối dây, kết nối giữa các linh kiện_
+|STM32F429|Joystick|Còi buzzer|
+|--|--|--|
+|3.3V|VCC||
+|GND|GND|GND|
+|PA1|VRx|
+|PA2|VRy|
+|PG13||VCC (led trên board)|
+
+### TÍCH HỢP HỆ THỐNG
+
+- Thành phần phần cứng:
+
+| Thành phần | Vai trò                                                      |
+| ---------- | ------------------------------------------------------------ |
+| STM32F429  | Xử lý logic trò chơi, điều khiển ngoại vi, tạo số ngẫu nhiên |
+| Joystick   | Điều khiển tàu (4 hướng)                                     |
+| Còi buzzer | Tạo âm thanh khi tiêu diệt quái                              |
+
+- Thành phần phần mềm:
+
+| Thành phần | Vai trò                                                    |
+| ---------- | ---------------------------------------------------------- |
+| Firmware   | Điều khiển trò chơi, xử lý joystick, buzzer, màn hình, RNG |
+
+### ĐẶC TẢ HÀM
+
+- Giải thích một số hàm quan trọng: ý nghĩa của hàm, tham số vào, ra
+
+  ```C
+     /**
+      *  Hàm tính ...
+      *  @param  x  Tham số
+      *  @param  y  Tham số
+      */
+     void abc(int x, int y = 2);
+  ```
+
+### KẾT QUẢ
+
+[Video demo Space Invaders](https://drive.google.com/file/d/1ug3VB_5Ezff92ucPog5qQGBh5jKgkAz7/view?usp=sharing)
+*Video: Demo trò chơi Space Invader trên STM32F429*
