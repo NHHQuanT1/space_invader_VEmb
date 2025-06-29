@@ -29,7 +29,7 @@ Nội dung cần báo cáo của môn đồ án:
   |STT|Họ tên|MSSV|Công việc|
   |--:|--|--|--|
   |1|Nguyễn Hiệp Hồng Quân|20215633|Tạo quái hiển thị ngẫu nhiên, kết nối joystick, kết nối còi buzeer và led LD3 khi tiêu diệt quái|
-  |2|Nguyễn Thành Bách|20204812|Tạo giao diện game, xử lý logic tiêu diệt quái, điểm số, số mạng, điều khiển joystick|
+  |2|Nguyễn Thành Bách|20204812|Tạo giao diện game, xử lý logic tiêu diệt quái, điểm số, số mạng, điều khiển di chuyển bằng joystick|
 
 ## MÔI TRƯỜNG HOẠT ĐỘNG
 
