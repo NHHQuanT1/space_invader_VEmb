@@ -95,15 +95,11 @@ const osThreadAttr_t GUI_Task_attributes = {
 };
 /* USER CODE BEGIN PV */
 uint8_t isRevD = 0; /* Applicable only for STM32F429I DISCOVERY REVD and above */
-osMessageQueueId_t Queue1Handle;
-//osMessageQueueId_t Queue2Handle;
-osMessageQueueId_t Queue3Handle;
-osMessageQueueId_t Queue4Handle;
+osMessageQueueId_t QueueXHandle;
+osMessageQueueId_t QueueYHandle;
 osMessageQueueId_t Queue5Handle;
-const osMessageQueueAttr_t Queue1_attributes = { .name = "Queue1" };
-//const osMessageQueueAttr_t Queue2_attributes = { .name = "Queue2" };
-const osMessageQueueAttr_t Queue3_attributes = { .name = "Queue3" };
-const osMessageQueueAttr_t Queue4_attributes = { .name = "Queue4" };
+const osMessageQueueAttr_t QueueX_attributes = { .name = "QueueX" };
+const osMessageQueueAttr_t QueueY_attributes = { .name = "QueueY" };
 const osMessageQueueAttr_t Queue5_attributes = { .name = "Queue5" };
 osStatus_t r_state;
 
@@ -242,10 +238,8 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_QUEUES */
 	/* add queues, ... */
-	Queue1Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue1_attributes);
-//	Queue2Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue2_attributes);
-	Queue3Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue3_attributes);
-	Queue4Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue4_attributes);
+	QueueXHandle = osMessageQueueNew(8, sizeof(uint8_t), &QueueX_attributes);
+	QueueYHandle = osMessageQueueNew(8, sizeof(uint8_t), &QueueY_attributes);
 	Queue5Handle = osMessageQueueNew(8, sizeof(uint8_t), &Queue5_attributes);
   /* USER CODE END RTOS_QUEUES */
 
@@ -1152,26 +1146,25 @@ void StartDefaultTask(void *argument)
 		printf("Joystick X: %lu, Y: %lu\r\n", x, y);
 		if (x > 50) { // Right
 			msg = 'R';
-			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
+			osMessageQueuePut(QueueXHandle, &msg, 0, 0);
 		} else if (x < 8) { // Left
 			msg = 'L';
-			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
+			osMessageQueuePut(QueueXHandle, &msg, 0, 0);
 		} else { // Neutral
 			msg = 'N';
-			osMessageQueuePut(Queue1Handle, &msg, 0, 0);
+			osMessageQueuePut(QueueXHandle, &msg, 0, 0);
 		}
 
 		// ---- Y Axis handling ----
 		if (y > 100) { // Up
 			msg = 'U';
-			osMessageQueuePut(Queue3Handle, &msg, 0, 0);
+			osMessageQueuePut(QueueYHandle, &msg, 0, 0);
 		} else if (y < 8) { // Down
 			msg = 'D';
-			osMessageQueuePut(Queue4Handle, &msg, 0, 0);
+			osMessageQueuePut(QueueYHandle, &msg, 0, 0);
 		} else { // Neutral
 			msg = 'N';
-			osMessageQueuePut(Queue3Handle, &msg, 0, 0);
-			osMessageQueuePut(Queue4Handle, &msg, 0, 0);
+			osMessageQueuePut(QueueYHandle, &msg, 0, 0);
 		}
 		osDelay(100);
 	}

@@ -11,10 +11,8 @@ extern void gameTask(void *argument);
 osThreadId_t gameTaskHandle;
 uint8_t hearts = 3;
 bool shouldStopScreen;
-extern osMessageQueueId_t Queue1Handle;
-//extern osMessageQueueId_t Queue2Handle;
-extern osMessageQueueId_t Queue3Handle;
-extern osMessageQueueId_t Queue4Handle;
+extern osMessageQueueId_t QueueXHandle;
+extern osMessageQueueId_t QueueYHandle;
 extern osMessageQueueId_t Queue5Handle;
 
 GameScreenView::GameScreenView() {
@@ -93,7 +91,7 @@ void GameScreenView::handleTickEvent() {
 	// get latest message
 	while (count5 > 0) {
 		osMessageQueueGet(Queue5Handle, &stopFlag, NULL, 0);
-		count5 --;
+		count5--;
 	}
 	if (stopFlag == 1 && !shouldStopScreen) {
 		add(menu_button);
@@ -111,42 +109,34 @@ void GameScreenView::handleTickEvent() {
 	// Get input
 	uint8_t res = 0;
 
-	uint32_t count = osMessageQueueGetCount(Queue1Handle);
+	uint32_t count = osMessageQueueGetCount(QueueXHandle);
 	if (count > 0) {
-		osMessageQueueGet(Queue1Handle, &res, NULL, osWaitForever);
+		osMessageQueueGet(QueueXHandle, &res, NULL, osWaitForever);
 		if (res == 'R') {
 			gameInstance.ship.updateVelocityX(gameInstance.ship.VELOCITY);
 			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_RIGHT_ID));
-			osMessageQueueReset(Queue1Handle);
+			osMessageQueueReset(QueueXHandle);
 		} else if (res == 'N') {
 			gameInstance.ship.updateVelocityX(0);
 			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_MAIN_ID));
 		} else {
 			gameInstance.ship.updateVelocityX(-gameInstance.ship.VELOCITY);
 			shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_LEFT_ID));
-			osMessageQueueReset(Queue1Handle);
+			osMessageQueueReset(QueueXHandle);
 		}
 	}
 
-	uint32_t count3 = osMessageQueueGetCount(Queue3Handle);
+	uint32_t count3 = osMessageQueueGetCount(QueueYHandle);
 	if (count3 > 0) {
-		osMessageQueueGet(Queue3Handle, &res, NULL, osWaitForever);
+		osMessageQueueGet(QueueYHandle, &res, NULL, osWaitForever);
 		if (res == 'U') {
 			gameInstance.ship.updateVelocityY(gameInstance.ship.VELOCITY);
-			osMessageQueueReset(Queue4Handle);
+			osMessageQueueReset(QueueYHandle);
 		} else if (res == 'N') {
 			gameInstance.ship.updateVelocityY(0);
-		}
-	}
-
-	uint32_t count4 = osMessageQueueGetCount(Queue4Handle);
-	if (count4 > 0) {
-		osMessageQueueGet(Queue4Handle, &res, NULL, osWaitForever);
-		if (res == 'D') {
+		} else {
 			gameInstance.ship.updateVelocityY(-gameInstance.ship.VELOCITY);
-			osMessageQueueReset(Queue3Handle);
-		} else if (res == 'N') {
-			gameInstance.ship.updateVelocityY(0);
+			osMessageQueueReset(QueueYHandle);
 		}
 	}
 
