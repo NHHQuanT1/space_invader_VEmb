@@ -6,6 +6,12 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_WXYY" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">ROUND 2</Translation>
+      </Text>
+      <Text Id="__SingleUse_C52Y" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">CONTINUE</Translation>
+      </Text>
       <Text Id="__SingleUse_D88Q" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">0</Translation>
       </Text>

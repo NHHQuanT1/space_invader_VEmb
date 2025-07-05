@@ -21,6 +21,13 @@ Enemy enemy[MAX_ENEMY];
 int spawnRate = MAX_SPAWN_RATE;
 int spawnSeed = 0;
 
+int currentRound = 1;
+bool isRoundTransition = false;
+int enemyBulletSpeed = 5;
+const int ENEMY_BULLET_SPEED_MAX = 12;
+
+volatile bool isGameTaskTerminated = false;
+
 // Biến để lưu trữ vị trí của tàu và các cờ để điều khiển trạng thái trò chơi
 uint16_t sx, sy;
 bool shouldEndGame;
@@ -30,6 +37,7 @@ bool shouldStopTask;
 void updateEnemy(uint8_t dt);
 void updateShipBullet(uint8_t dt);
 void updateEnemyBullet(uint8_t dt);
+void resetGameObjectsForNextRound();
 
 // Biến lưu thời gian đã trôi qua
 uint8_t dt = 0;
@@ -38,6 +46,8 @@ extern osMessageQueueId_t Queue5Handle;
 
 // Nhiệm vụ của task game
 void gameTask(void *argument) {
+    shouldEndGame = false;
+    shouldStopTask = false;
 	int loopCount = 0;
 
 	// Khởi tạo vị trí và trạng thái ban đầu cho đạn và kẻ địch
@@ -58,6 +68,13 @@ void gameTask(void *argument) {
 //	uint32_t previousTick = 0, currentTick = 0;
 	for (;;) {
 		loopCount++;
+		// Kiểm tra nút PG13 mỗi vòng lặp để tăng tốc độ đạn quái khi nhấn
+		if (HAL_GPIO_ReadPin(GPIOG, GPIO_PIN_13) == GPIO_PIN_SET) {
+			if (enemyBulletSpeed < ENEMY_BULLET_SPEED_MAX) {
+				enemyBulletSpeed++;
+				osDelay(200); // Chống tăng liên tục khi giữ nút
+			}
+		}
 		// Nếu cờ kết thúc trò chơi và dừng task được đặt, thoát khỏi vòng lặp
 		if (shouldEndGame == true && shouldStopTask == true) {
 			break;
@@ -127,6 +144,8 @@ void gameTask(void *argument) {
 			}
 		}
 
+		
+
 		// Kiểm tra va chạm giữa tàu và đạn của kẻ địch
 		for (int i = 0; i < MAX_BULLET; i++) {
 			if (enemyBullet[i].displayStatus != IS_SHOWN)
@@ -149,11 +168,35 @@ void gameTask(void *argument) {
 				osDelay(10); // Small delay to yield CPU
 			}
 			break;
-		} else {
+		} 
+
+		else if (currentRound == 1 && gameInstance.score >= 20) {
+			shouldEndGame = true;
+			isRoundTransition = true;
+			// Gửi message đặc biệt để UI biết là chuyển round
+			uint8_t msg = 2;
+			osMessageQueuePut(Queue5Handle, &msg, 0, 0);
+					// Chờ UI gửi tín hiệu continue (ví dụ đặt shouldEndGame = false từ ngoài)
+			while (shouldEndGame && isRoundTransition) {
+				osDelay(10);  // Đợi đến khi người dùng nhấn “continue”
+			}
+
+			// Reset lại các đối tượng và tiếp tục vòng mới
+			currentRound++;
+			shouldEndGame = false;  // Cho phép game tiếp tục
+			// while (!shouldStopTask) {
+			// 	osDelay(10);
+			// }
+			// break;
+		}
+		else {
 			msg = '0';
 			osMessageQueuePut(Queue5Handle, &msg, 0, 0);
 		}
 	}
+	isGameTaskTerminated = true;
+	return;
+
 }
 
 // Cập nhật vị trí của kẻ địch
@@ -239,6 +282,11 @@ void updateShipBullet(uint8_t dt) {
 // Cập nhật vị trí của đạn từ kẻ địch
 
 void updateEnemyBullet(uint8_t dt) {
+	// Đặt tốc độ đạn enemy theo round
+	int bulletSpeed = enemyBulletSpeed;
+	if (currentRound == 2) bulletSpeed += 1;
+	if (bulletSpeed > ENEMY_BULLET_SPEED_MAX) bulletSpeed = ENEMY_BULLET_SPEED_MAX;
+
 	for (int j = 0; j < MAX_ENEMY; j++) {
 		if (enemy[j].displayStatus != IS_SHOWN)
 			continue;
@@ -252,8 +300,8 @@ void updateEnemyBullet(uint8_t dt) {
 				continue;
 
 			// Tạo mới đạn từ kẻ địch và hiển thị lên màn hình
-			enemyBullet[i].updateCoordinate(enemy[j].coordinateX,
-					enemy[j].coordinateY + 16);
+			enemyBullet[i].updateCoordinate(enemy[j].coordinateX, enemy[j].coordinateY + 16);
+			enemyBullet[i].updateVelocity(0, bulletSpeed); // Sử dụng tốc độ mới
 			enemyBullet[i].updateDisplayStatus(SHOULD_SHOW);
 			break;
 		}
@@ -266,4 +314,32 @@ void updateEnemyBullet(uint8_t dt) {
 		enemyBullet[i].update(dt);
 	}
 
+}
+
+// Đặt lại trạng thái của các đối tượng trong trò chơi cho vòng chơi tiếp theo
+void resetGameObjectsForNextRound() {
+    // Reset enemy
+    for (int i = 0; i < MAX_ENEMY; i++) {
+        enemy[i].updateCoordinate(-50, -50);
+        enemy[i].updateDisplayStatus(IS_HIDDEN);
+    }
+    // Reset bullets
+    for (int i = 0; i < MAX_BULLET; i++) {
+        shipBullet[i].updateCoordinate(-50, -50);
+        shipBullet[i].updateDisplayStatus(IS_HIDDEN);
+        enemyBullet[i].updateCoordinate(-50, -50);
+        enemyBullet[i].updateDisplayStatus(IS_HIDDEN);
+    }
+    // Reset tàu về vị trí ban đầu (giữ nguyên số mạng và điểm)
+    gameInstance.ship.coordinateX = 100;
+    gameInstance.ship.coordinateY = 200;
+    gameInstance.ship.updateVelocityX(0);
+    gameInstance.ship.updateVelocityY(0);
+    // Đảm bảo các biến trạng thái cho phép tàu di chuyển lại bình thường
+    // Nếu có biến nào khác kiểm soát input/di chuyển, reset tại đây
+    // spawnRate = MAX_SPAWN_RATE;
+    spawnRate = 0; // Cho phép spawn quái ngay lập tức khi vào round mới
+    shouldEndGame = false;
+    shouldStopTask = false;
+    // isGameTaskTerminated = false;
 }

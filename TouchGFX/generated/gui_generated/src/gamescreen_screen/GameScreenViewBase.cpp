@@ -21,6 +21,13 @@ GameScreenViewBase::GameScreenViewBase() :
     menu_button.setAction(buttonCallback);
     add(menu_button);
 
+    continue_round2.setXY(35, 189);
+    continue_round2.setBitmaps(touchgfx::Bitmap(BITMAP_DARK_BUTTONS_SQUARE_SMALL_ID), touchgfx::Bitmap(BITMAP_DARK_BUTTONS_SQUARE_SMALL_PRESSED_ID));
+    continue_round2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_C52Y));
+    continue_round2.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    continue_round2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    add(continue_round2);
+
     heart_03.setXY(204, 1);
     heart_03.setBitmap(touchgfx::Bitmap(BITMAP_HEART_ID));
     add(heart_03);
@@ -48,6 +55,12 @@ GameScreenViewBase::GameScreenViewBase() :
     score_holder.setWildcard(score_holderBuffer);
     score_holder.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CFD2));
     add(score_holder);
+
+    round_2.setPosition(0, 115, 240, 34);
+    round_2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    round_2.setLinespacing(0);
+    round_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WXYY));
+    add(round_2);
 
     animatedImage1.setXY(208, 1);
     animatedImage1.setBitmaps(BITMAP_ENEMY_RED_01_ID, BITMAP_ENEMY_RED_02_ID);

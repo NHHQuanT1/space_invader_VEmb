@@ -8,6 +8,17 @@
 
 // Khai báo biến extern và một số biến toàn cục khác
 extern void gameTask(void *argument);
+
+extern int currentRound;
+extern bool isRoundTransition;
+extern int enemyBulletSpeed;
+extern const int ENEMY_BULLET_SPEED_MAX;
+extern void resetGameObjectsForNextRound();
+extern int spawnRate;
+
+extern const int MAX_SPAWN_RATE;
+
+
 osThreadId_t gameTaskHandle;
 uint8_t hearts = 3;
 bool shouldStopScreen;
@@ -22,6 +33,8 @@ GameScreenView::GameScreenView() {
 	gameInstance = Game();
 	remove(menu_button);
 	remove(score_holder);
+	remove(continue_round2);
+	remove(round_2);
 	// Prepare ship
 	// Chuẩn bị hình ảnh cho tàu và thiết lập vị trí ban đầu
 	shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_MAIN_ID));
@@ -102,6 +115,17 @@ void GameScreenView::handleTickEvent() {
 		add(score_holder);
 		menu_button.invalidate();
 		score_holder.invalidate();
+		invalidate();
+		shouldStopTask = true;
+		shouldStopScreen = true;
+		osThreadTerminate(gameTaskHandle);
+	}
+
+	if (stopFlag == 2 && !shouldStopScreen) {
+		add(continue_round2);
+		add(round_2);
+		continue_round2.invalidate();
+		round_2.invalidate();
 		invalidate();
 		shouldStopTask = true;
 		shouldStopScreen = true;
@@ -247,4 +271,54 @@ void GameScreenView::handleTickEvent() {
 	Unicode::snprintf(score_boardBuffer, SCORE_BOARD_SIZE, "%d",
 			gameInstance.score);
 	invalidate();
+	
+	if (continue_round2.getPressedState()) {
+		// Sang round 2
+		currentRound = 2;
+		isRoundTransition = false;
+		shouldEndGame = false;
+		shouldStopTask = false;
+		shouldStopScreen = false;
+
+		// Reset trạng thái game cho round mới (không reset điểm và mạng)
+		resetGameObjectsForNextRound();
+
+		// Remove all enemy and bullet images from UI
+		for (int i = 0; i < MAX_ENEMY; i++) {
+			remove(enemyImage[i]);
+		}
+		for (int i = 0; i < MAX_BULLET; i++) {
+			remove(shipBulletImage[i]);
+			remove(enemyBulletImage[i]);
+		}
+
+		// Ẩn nút và label round 2
+		remove(continue_round2);
+		remove(round_2);
+		continue_round2.invalidate();
+		round_2.invalidate();
+		invalidate();
+
+		hearts = gameInstance.ship.lives; // Đảm bảo trái tim hiển thị đúng
+
+		stopFlag = 0;
+		spawnRate = 0;
+
+		// osDelay(100);
+		// 		// Chờ task cũ kết thúc hoàn toàn
+		// while (!isGameTaskTerminated) {
+		// 	osDelay(10);  // nhường CPU
+		// }
+		// isGameTaskTerminated = false;  // Reset lại cờ
+
+		// Tạo lại task
+		const osThreadAttr_t gameTask_attributes = {
+			.name = "gameTask",
+			.stack_size = 8192 * 2,
+			.priority = (osPriority_t) osPriorityNormal
+		};
+		gameTaskHandle = osThreadNew(gameTask, NULL, &gameTask_attributes);
+
+	}
+
 }

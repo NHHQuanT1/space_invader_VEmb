@@ -78,6 +78,28 @@
             "TextRotation": "0"
           },
           {
+            "Type": "ButtonWithLabel",
+            "Name": "continue_round2",
+            "X": 35,
+            "Y": 189,
+            "Width": 170,
+            "Height": 60,
+            "Pressed": "Dark_Buttons_Square_small_pressed.png",
+            "Released": "Dark_Buttons_Square_small.png",
+            "TextId": "__SingleUse_C52Y",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0"
+          },
+          {
             "Type": "Image",
             "Name": "heart_03",
             "X": 204,
@@ -140,6 +162,20 @@
             "Wildcard1": {
               "UseBuffer": true,
               "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "round_2",
+            "Y": 115,
+            "Width": 240,
+            "Height": 34,
+            "TextId": "__SingleUse_WXYY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
             }
           },
           {

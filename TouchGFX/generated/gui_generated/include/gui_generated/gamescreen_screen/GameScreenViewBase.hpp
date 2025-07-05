@@ -11,6 +11,7 @@
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/AnimatedImage.hpp>
 
 class GameScreenViewBase : public touchgfx::View<GameScreenPresenter>
@@ -30,11 +31,13 @@ protected:
      */
     touchgfx::Box __background;
     touchgfx::ButtonWithLabel menu_button;
+    touchgfx::ButtonWithLabel continue_round2;
     touchgfx::Image heart_03;
     touchgfx::Image heart_02;
     touchgfx::Image heart_01;
     touchgfx::TextAreaWithOneWildcard score_board;
     touchgfx::TextAreaWithOneWildcard score_holder;
+    touchgfx::TextArea round_2;
     touchgfx::AnimatedImage animatedImage1;
 
     /*
