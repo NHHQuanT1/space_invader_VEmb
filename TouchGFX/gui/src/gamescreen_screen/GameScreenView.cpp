@@ -32,6 +32,7 @@ GameScreenView::GameScreenView() {
 	// Khởi tạo đối tượng Game và các thành phần đồ họa trên màn hình game
 	gameInstance = Game();
 	remove(menu_button);
+	// menu_button.setVisible(false);
 	remove(score_holder);
 	remove(continue_round2);
 	remove(round_2);
@@ -110,6 +111,7 @@ void GameScreenView::handleTickEvent() {
 	}
 	if (stopFlag == 1 && !shouldStopScreen) {
 		add(menu_button);
+
 		Unicode::snprintf(score_holderBuffer, SCORE_HOLDER_SIZE, "%d",
 				gameInstance.score);
 		add(score_holder);
@@ -129,7 +131,7 @@ void GameScreenView::handleTickEvent() {
 		invalidate();
 		shouldStopTask = true;
 		shouldStopScreen = true;
-		osThreadTerminate(gameTaskHandle);
+		osThreadTerminate(gameTaskHandle); 
 	}
 
 	// Get input

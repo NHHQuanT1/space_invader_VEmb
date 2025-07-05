@@ -165,7 +165,7 @@ void gameTask(void *argument) {
 			while (!shouldStopTask) {
 				msg = 1;
 				osMessageQueuePut(Queue5Handle, &msg, 0, 0);
-				osDelay(10); // Small delay to yield CPU
+				osDelay(50); // Small delay to yield CPU
 			}
 			break;
 		} 
