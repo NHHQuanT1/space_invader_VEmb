@@ -13,6 +13,10 @@ GameScreenViewBase::GameScreenViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
+    image2.setXY(0, 0);
+    image2.setBitmap(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_BACKGROUNDS_240X320_PUZZLE_ID));
+    add(image2);
+
     menu_button.setXY(35, 189);
     menu_button.setBitmaps(touchgfx::Bitmap(BITMAP_DARK_BUTTONS_SQUARE_SMALL_ID), touchgfx::Bitmap(BITMAP_DARK_BUTTONS_SQUARE_SMALL_PRESSED_ID));
     menu_button.setLabelText(touchgfx::TypedText(T___SINGLEUSE_24XT));

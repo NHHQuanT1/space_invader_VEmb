@@ -8,8 +8,8 @@
 #include <mvp/View.hpp>
 #include <gui/gamescreen_screen/GameScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/Image.hpp>
+#include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/AnimatedImage.hpp>
@@ -30,6 +30,7 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
+    touchgfx::Image image2;
     touchgfx::ButtonWithLabel menu_button;
     touchgfx::ButtonWithLabel continue_round2;
     touchgfx::Image heart_03;

@@ -20,6 +20,7 @@ private:
     touchgfx::AnimatedImage enemyImage[MAX_ENEMY];
     touchgfx::Image shipBulletImage[MAX_BULLET];
     touchgfx::Image enemyBulletImage[MAX_BULLET];
+    touchgfx::Image backgroundImage;
 };
 
 #endif // GAMESCREENVIEW_HPP

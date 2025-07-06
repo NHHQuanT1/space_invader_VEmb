@@ -42,6 +42,7 @@
 "./Application/User/generated/VectorFontRendererBuffers.o"
 "./Application/User/generated/image_Dark_Buttons_Square_small.o"
 "./Application/User/generated/image_Dark_Buttons_Square_small_pressed.o"
+"./Application/User/generated/image_alternate_theme_images_backgrounds_240x320_puzzle.o"
 "./Application/User/generated/image_bullet-double.o"
 "./Application/User/generated/image_enemy-bullet-green.o"
 "./Application/User/generated/image_enemy-bullet-red.o"

@@ -36,8 +36,14 @@ GameScreenView::GameScreenView() {
 	remove(score_holder);
 	remove(continue_round2);
 	remove(round_2);
+	remove(image2);
 	// Prepare ship
 	// Chuẩn bị hình ảnh cho tàu và thiết lập vị trí ban đầu
+	backgroundImage.setBitmap(Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_BACKGROUNDS_240X320_PUZZLE_ID));
+	backgroundImage.setXY(0, 0);
+	backgroundImage.setVisible(false);
+	add(backgroundImage);
+
 	shipImage.setBitmap(touchgfx::Bitmap(BITMAP_SHIP_MAIN_ID));
 	shipImage.setXY(gameInstance.ship.coordinateX,
 			gameInstance.ship.coordinateY);
@@ -88,18 +94,10 @@ void GameScreenView::setupScreen() {
 
 	// Tạo một task mới có các thuộc tính đã được khai báo trước đó
 	gameTaskHandle = osThreadNew(gameTask, NULL, &gameTask_attributes);
-	// Reset tất cả trạng thái game về ban đầu
-    currentRound = 1;
-    isRoundTransition = false;
-    shouldEndGame = false;
-    shouldStopTask = false;
-    shouldStopScreen = false;
-    
-    // Reset enemy bullet speed về mặc định
-    enemyBulletSpeed = 5;
-    spawnRate = 0;
-
-	}
+	shouldEndGame = false;
+	shouldStopTask = false;
+	shouldStopScreen = false;
+}
 
 void GameScreenView::tearDownScreen() {
 	GameScreenViewBase::tearDownScreen();
@@ -110,7 +108,7 @@ void GameScreenView::handleTickEvent() {
 	GameScreenViewBase::handleTickEvent();
 
 	// display end game screen
-	uint8_t stopFlag = 0;
+	uint8_t stopFlag;
 	uint32_t count5 = osMessageQueueGetCount(Queue5Handle);
 	// get latest message
 	while (count5 > 0) {
@@ -129,10 +127,6 @@ void GameScreenView::handleTickEvent() {
 		shouldStopTask = true;
 		shouldStopScreen = true;
 		osThreadTerminate(gameTaskHandle);
-
-		// Reset currentRound về 1 khi game over
-        currentRound = 1;
-        isRoundTransition = false;
 	}
 
 	if (stopFlag == 2 && !shouldStopScreen) {
@@ -294,9 +288,17 @@ void GameScreenView::handleTickEvent() {
 		shouldStopTask = false;
 		shouldStopScreen = false;
 
+		backgroundImage.setVisible(true);
+		backgroundImage.invalidate();
+		osDelay(100); 
+
 		// Reset trạng thái game cho round mới (không reset điểm và mạng)
 		resetGameObjectsForNextRound();
-
+		// Đổi background
+		// backgroundImage.setBitmap(Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_BACKGROUNDS_240X320_PUZZLE_ID));
+		// backgroundImage.setXY(0, 0);
+		// add(backgroundImage);
+		// backgroundImage.invalidate();
 		// Remove all enemy and bullet images from UI
 		for (int i = 0; i < MAX_ENEMY; i++) {
 			remove(enemyImage[i]);
@@ -313,14 +315,19 @@ void GameScreenView::handleTickEvent() {
 		round_2.invalidate();
 		invalidate();
 
+		
+
 		hearts = gameInstance.ship.lives; // Đảm bảo trái tim hiển thị đúng
 
 		stopFlag = 0;
 		spawnRate = 0;
 
-		// Clear queue để tránh message cũ
-        osMessageQueueReset(Queue5Handle);
-
+		// osDelay(100);
+		// 		// Chờ task cũ kết thúc hoàn toàn
+		// while (!isGameTaskTerminated) {
+		// 	osDelay(10);  // nhường CPU
+		// }
+		// isGameTaskTerminated = false;  // Reset lại cờ
 
 		// Tạo lại task
 		const osThreadAttr_t gameTask_attributes = {

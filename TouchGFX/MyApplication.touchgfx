@@ -56,6 +56,13 @@
         "Name": "GameScreen",
         "Components": [
           {
+            "Type": "Image",
+            "Name": "image2",
+            "Width": 240,
+            "Height": 320,
+            "RelativeFilename": "__generated\\alternate_theme_images_backgrounds_240x320_puzzle.png"
+          },
+          {
             "Type": "ButtonWithLabel",
             "Name": "menu_button",
             "X": 35,
