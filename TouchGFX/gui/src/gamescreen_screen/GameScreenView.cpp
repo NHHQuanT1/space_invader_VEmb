@@ -103,6 +103,27 @@ void GameScreenView::tearDownScreen() {
 	GameScreenViewBase::tearDownScreen();
 }
 
+void GameScreenView::bringUIElementsToFront() {
+    // Đưa các thành phần UI quan trọng lên trên cùng
+    remove(score_board);
+    add(score_board);
+    
+    remove(heart_01);
+    add(heart_01);
+    
+    remove(heart_02);
+    add(heart_02);
+    
+    remove(heart_03);
+    add(heart_03);
+    
+    // Invalidate để vẽ lại
+    score_board.invalidate();
+    heart_01.invalidate();
+    heart_02.invalidate();
+    heart_03.invalidate();
+}
+
 // Render game objects
 void GameScreenView::handleTickEvent() {
 	GameScreenViewBase::handleTickEvent();
@@ -280,26 +301,25 @@ void GameScreenView::handleTickEvent() {
 			gameInstance.score);
 	invalidate();
 	
+
 	if (continue_round2.getPressedState()) {
 		// Sang round 2
+
 		currentRound = 2;
 		isRoundTransition = false;
 		shouldEndGame = false;
 		shouldStopTask = false;
 		shouldStopScreen = false;
 
+		
 		backgroundImage.setVisible(true);
 		backgroundImage.invalidate();
 		osDelay(100); 
 
 		// Reset trạng thái game cho round mới (không reset điểm và mạng)
+		bringUIElementsToFront();
 		resetGameObjectsForNextRound();
-		// Đổi background
-		// backgroundImage.setBitmap(Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_BACKGROUNDS_240X320_PUZZLE_ID));
-		// backgroundImage.setXY(0, 0);
-		// add(backgroundImage);
-		// backgroundImage.invalidate();
-		// Remove all enemy and bullet images from UI
+		
 		for (int i = 0; i < MAX_ENEMY; i++) {
 			remove(enemyImage[i]);
 		}
@@ -315,9 +335,12 @@ void GameScreenView::handleTickEvent() {
 		round_2.invalidate();
 		invalidate();
 
-		
-
-		hearts = gameInstance.ship.lives; // Đảm bảo trái tim hiển thị đúng
+			// Đảm bảo các thành phần UI quan trọng được vẽ lại
+		heart_01.invalidate();
+		heart_02.invalidate();
+		heart_03.invalidate();
+		score_board.invalidate();
+		// hearts = gameInstance.ship.lives; // Đảm bảo trái tim hiển thị đúng
 
 		stopFlag = 0;
 		spawnRate = 0;

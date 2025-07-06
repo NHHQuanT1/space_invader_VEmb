@@ -182,7 +182,7 @@ void gameTask(void *argument) {
 			}
 
 			// Reset lại các đối tượng và tiếp tục vòng mới
-			currentRound++;
+			currentRound = 2;
 			shouldEndGame = false;  // Cho phép game tiếp tục
 			// while (!shouldStopTask) {
 			// 	osDelay(10);

@@ -20,5 +20,6 @@ C:/HeNhung/MyApplication/TouchGFX/gui/src/gamescreen_screen/GameScreenView.cpp:1
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Drawable.hpp:343:10:void touchgfx::Drawable::setXY(int16_t, int16_t)	16	static
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Image.hpp:50:5:touchgfx::Image::Image(const touchgfx::Bitmap&)	8	static
 C:/HeNhung/MyApplication/TouchGFX/gui/src/gamescreen_screen/GameScreenView.cpp:31:1:GameScreenView::GameScreenView()	88	static
-C:/HeNhung/MyApplication/TouchGFX/gui/src/gamescreen_screen/GameScreenView.cpp:107:6:virtual void GameScreenView::handleTickEvent()	96	static
+C:/HeNhung/MyApplication/TouchGFX/gui/src/gamescreen_screen/GameScreenView.cpp:106:6:void GameScreenView::bringUIElementsToFront()	24	static
+C:/HeNhung/MyApplication/TouchGFX/gui/src/gamescreen_screen/GameScreenView.cpp:128:6:virtual void GameScreenView::handleTickEvent()	96	static
 C:/HeNhung/MyApplication/TouchGFX/gui/src/gamescreen_screen/GameScreenView.cpp:84:6:virtual void GameScreenView::setupScreen()	48	static

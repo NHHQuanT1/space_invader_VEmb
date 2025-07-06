@@ -15,6 +15,7 @@ public:
     void handleTickEvent();
 protected:
     void getInput();
+    void bringUIElementsToFront();
 private:
     touchgfx::Image shipImage;
     touchgfx::AnimatedImage enemyImage[MAX_ENEMY];
