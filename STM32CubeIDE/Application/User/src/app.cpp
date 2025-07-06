@@ -159,7 +159,7 @@ void gameTask(void *argument) {
 		}
 
 		// Nếu tàu hết máu, đặt cờ kết thúc trò chơi
-		uint8_t msg;
+		uint8_t msg = 0;
 		if (gameInstance.ship.lives <= 0) {
 			shouldEndGame = true;
 			while (!shouldStopTask) {
@@ -170,11 +170,11 @@ void gameTask(void *argument) {
 			break;
 		} 
 
-		else if (currentRound == 1 && gameInstance.score >= 20) {
+		else if (currentRound == 1 && gameInstance.score >= 30) {
 			shouldEndGame = true;
 			isRoundTransition = true;
 			// Gửi message đặc biệt để UI biết là chuyển round
-			uint8_t msg = 2;
+			msg = 2;
 			osMessageQueuePut(Queue5Handle, &msg, 0, 0);
 					// Chờ UI gửi tín hiệu continue (ví dụ đặt shouldEndGame = false từ ngoài)
 			while (shouldEndGame && isRoundTransition) {

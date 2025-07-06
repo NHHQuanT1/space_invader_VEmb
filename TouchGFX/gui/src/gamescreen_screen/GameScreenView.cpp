@@ -88,10 +88,18 @@ void GameScreenView::setupScreen() {
 
 	// Tạo một task mới có các thuộc tính đã được khai báo trước đó
 	gameTaskHandle = osThreadNew(gameTask, NULL, &gameTask_attributes);
-	shouldEndGame = false;
-	shouldStopTask = false;
-	shouldStopScreen = false;
-}
+	// Reset tất cả trạng thái game về ban đầu
+    currentRound = 1;
+    isRoundTransition = false;
+    shouldEndGame = false;
+    shouldStopTask = false;
+    shouldStopScreen = false;
+    
+    // Reset enemy bullet speed về mặc định
+    enemyBulletSpeed = 5;
+    spawnRate = 0;
+
+	}
 
 void GameScreenView::tearDownScreen() {
 	GameScreenViewBase::tearDownScreen();
@@ -102,7 +110,7 @@ void GameScreenView::handleTickEvent() {
 	GameScreenViewBase::handleTickEvent();
 
 	// display end game screen
-	uint8_t stopFlag;
+	uint8_t stopFlag = 0;
 	uint32_t count5 = osMessageQueueGetCount(Queue5Handle);
 	// get latest message
 	while (count5 > 0) {
@@ -121,6 +129,10 @@ void GameScreenView::handleTickEvent() {
 		shouldStopTask = true;
 		shouldStopScreen = true;
 		osThreadTerminate(gameTaskHandle);
+
+		// Reset currentRound về 1 khi game over
+        currentRound = 1;
+        isRoundTransition = false;
 	}
 
 	if (stopFlag == 2 && !shouldStopScreen) {
@@ -306,12 +318,9 @@ void GameScreenView::handleTickEvent() {
 		stopFlag = 0;
 		spawnRate = 0;
 
-		// osDelay(100);
-		// 		// Chờ task cũ kết thúc hoàn toàn
-		// while (!isGameTaskTerminated) {
-		// 	osDelay(10);  // nhường CPU
-		// }
-		// isGameTaskTerminated = false;  // Reset lại cờ
+		// Clear queue để tránh message cũ
+        osMessageQueueReset(Queue5Handle);
+
 
 		// Tạo lại task
 		const osThreadAttr_t gameTask_attributes = {
