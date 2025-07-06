@@ -12,6 +12,7 @@ public:
     virtual ~GameScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    // virtual void handleKeyEvent(uint8_t key) override;
     void handleTickEvent();
 protected:
     void getInput();

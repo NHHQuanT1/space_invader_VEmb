@@ -99,9 +99,50 @@ void GameScreenView::setupScreen() {
 	shouldStopScreen = false;
 }
 
-void GameScreenView::tearDownScreen() {
-	GameScreenViewBase::tearDownScreen();
+void GameScreenView::tearDownScreen()
+{
+    GameScreenViewBase::tearDownScreen();
+    
+    // Đảm bảo dừng task game hoàn toàn
+    if (gameTaskHandle != nullptr) {
+        osThreadTerminate(gameTaskHandle);
+        gameTaskHandle = nullptr;
+    }
+    
+    // Reset các biến quan trọng
+    currentRound = 1;
+    isRoundTransition = false;
+    shouldEndGame = false;
+    shouldStopTask = false;
+    shouldStopScreen = false;
+    
+    // Reset trạng thái game
+    gameInstance.reset(); // Thêm hàm reset() vào class Game nếu chưa có
 }
+
+// void GameScreenView::handleKeyEvent(uint8_t key)
+// {
+//     if (key == 'B') { // GO BACK button
+//         // Dừng task game nếu đang chạy
+//         if (gameTaskHandle != nullptr) {
+//             osThreadTerminate(gameTaskHandle);
+//             gameTaskHandle = nullptr;
+//         }
+        
+//         // Reset các biến trạng thái
+//         currentRound = 1;
+//         isRoundTransition = false;
+//         shouldEndGame = false;
+//         shouldStopTask = false;
+//         shouldStopScreen = false;
+        
+//         // Chuyển về màn hình chính
+//         static_cast<FrontendApplication*>(Application::getInstance())->gotoMainMenuScreen();
+//     }
+    
+//     // Gọi hàm base để xử lý các key event khác
+//     GameScreenViewBase::handleKeyEvent(key);
+// }
 
 void GameScreenView::bringUIElementsToFront() {
     // Đưa các thành phần UI quan trọng lên trên cùng
@@ -304,7 +345,11 @@ void GameScreenView::handleTickEvent() {
 
 	if (continue_round2.getPressedState()) {
 		// Sang round 2
-
+		// Đảm bảo dừng task cũ hoàn toàn
+		if (gameTaskHandle != nullptr) {
+			osThreadTerminate(gameTaskHandle);
+			gameTaskHandle = nullptr;
+		}
 		currentRound = 2;
 		isRoundTransition = false;
 		shouldEndGame = false;

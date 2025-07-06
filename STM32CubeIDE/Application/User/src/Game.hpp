@@ -16,6 +16,12 @@ public:
 	virtual ~Game();
 	void update();
 	void updateScore(short score);
+	void reset() {
+	        score = 0;
+	        ship.lives = 3;
+	        ship.coordinateX = 100;
+	        ship.coordinateY = 200;
+	    }
 };
 
 #endif /* APPLICATION_USER_SRC_GAME_HPP_ */
