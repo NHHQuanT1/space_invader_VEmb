@@ -28,7 +28,7 @@ Nội dung cần báo cáo của môn đồ án:
 - Thành viên trong nhóm
   |STT|Họ tên|MSSV|Công việc|
   |--:|--|--|--|
-  |1|Nguyễn Hiệp Hồng Quân|20215633|Tạo quái hiển thị ngẫu nhiên, kết nối joystick, kết nối còi buzeer và led LD3 khi tiêu diệt quái|
+  |1|Nguyễn Hiệp Hồng Quân|20215633|Tạo quái hiển thị ngẫu nhiên, kết nối joystick, kết nối còi buzeer và led LD3 khi tiêu diệt quái, thay đổi hình nền sang Round 2, tăng tốc độ khi nhấn phím PG13|
   |2|Nguyễn Thành Bách|20204812|Tạo giao diện game, xử lý logic tiêu diệt quái, điểm số, số mạng, điều khiển di chuyển bằng joystick|
 
 ## MÔI TRƯỜNG HOẠT ĐỘNG
@@ -84,3 +84,12 @@ _Cách nối dây, kết nối giữa các linh kiện_
 
 [Video demo Space Invaders](https://drive.google.com/file/d/1ug3VB_5Ezff92ucPog5qQGBh5jKgkAz7/view?usp=sharing)
 *Video: Demo trò chơi Space Invader trên STM32F429*
+
+### CÁC LỖI GẶP PHẢI
+
+**Lỗi không trở về màn hình chính khi nhấn phím GO BACK**:
+  - **Mô tả**: Hiện tượng nhấn lúc được lúc không, số lần không được là phần nhiều (cỡ 80% là không được).
+  - **Cách sửa**: Tăng osDelay từ 10 lên 50 --> chưa giải thích rõ được.
+  - **Tham chiếu**: [Commit #5d97742ca5ae1c521e359fb966b1934d24222c83](https://github.com/NHHQuanT1/space_invader_VEmb/tree/5d97742ca5ae1c521e359fb966b1934d24222c83)
+  - **Giao diện**: [Giao diện GO BACK](https://drive.google.com/file/d/1t2PX0TbUJ5Jbm3zfvH8NJB5U94uvDciH/view?usp=sharing)
+
